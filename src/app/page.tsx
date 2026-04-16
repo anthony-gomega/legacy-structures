@@ -32,7 +32,9 @@ export default function Home() {
   return (
     <div>
       {/* ===== Section 1: Hero Slider ===== */}
-      <HeroSlider />
+      <div style={{ overflow: "hidden", position: "relative" }}>
+        <HeroSlider />
+      </div>
 
       {/* ===== Section 2: Red Two-Column CTA ===== */}
       <section style={{ backgroundColor: "#af1919" }}>
@@ -307,7 +309,7 @@ export default function Home() {
       </section>
 
       {/* ===== Section 7: Materials Section ===== */}
-      <section style={{ padding: "0 20px" }}>
+      <section style={{ padding: "0 20px", backgroundColor: "#fff", color: "#222" }}>
         <h1
           style={{
             textAlign: "center",

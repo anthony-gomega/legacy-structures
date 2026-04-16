@@ -24,36 +24,39 @@ const GARAGE_SIZES = [
 export default function PortableGaragesPage() {
   return (
     <div>
-      {/* Inner Hero */}
-      <div className="bg-[#00567a] px-5 pt-5 pb-0 text-center">
-        <img
-          src={`${BASE_URL}/garage-slider-1.png`}
-          alt="Portable Garages by Legacy Structures"
-          className="inline-block max-w-[49%] px-[10px]"
-        />
+      {/* Inner Hero - Page Title Bar */}
+      <div className="bg-[#00567a] py-8 text-center">
+        <h1 className="text-white text-4xl font-bold" style={{ fontFamily: "'Tungsten Semibold', sans-serif" }}>About Our Portable Garages</h1>
       </div>
 
-      {/* Slider-Form Wrapper */}
-      <div className="flex flex-col lg:flex-row">
-        {/* Left - 3D Designer CTA */}
-        <div className="lg:w-[67%] flex items-center justify-center p-6">
-          <a href="https://orders.barnportal.com/myquote?dealerid=&dir=1&template=1" target="_blank" rel="noopener noreferrer">
+      {/* Hero Image + Quote Form Row */}
+      <div className="bg-white">
+        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row">
+          {/* Left - Hero Image + 3D Designer CTA */}
+          <div className="lg:w-[67%]">
             <img
-              src={`${BASE_URL}/3d-designer-models-cta.png`}
-              alt="3D Designer - Design Your Own Building"
-              className="max-w-full h-auto"
+              src={`${BASE_URL}/garage-slider-1.png`}
+              alt="Portable Garages by Legacy Structures"
+              className="w-full h-auto"
             />
-          </a>
-        </div>
-        {/* Right - Quote Form */}
-        <div className="lg:w-[33%] p-4">
-          <QuoteForm title="Request Your" titleSpan="FREE Garage Quote!" />
+            <a href="https://orders.barnportal.com/myquote?dealerid=&dir=1&template=1" target="_blank" rel="noopener noreferrer" className="block">
+              <img
+                src={`${BASE_URL}/3d-designer-models-cta.png`}
+                alt="3D Designer - Design Your Own Building"
+                className="w-full h-auto"
+              />
+            </a>
+          </div>
+          {/* Right - Quote Form */}
+          <div className="lg:w-[33%]">
+            <QuoteForm title="Request Your" titleSpan="FREE Garage Quote!" />
+          </div>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 py-10">
-        <h1 className="text-3xl font-bold text-[#2d5a27] mb-4">
+      <div className="bg-white max-w-7xl mx-auto px-4 py-10">
+        <h1 className="text-center font-bold text-[#00567a] mb-4" style={{ fontFamily: "'Tungsten Semibold', sans-serif", fontSize: '50px' }}>
           Protect Your Investment With A Portable Garage&hellip;
         </h1>
         <p className="text-gray-700 leading-relaxed mb-4">
