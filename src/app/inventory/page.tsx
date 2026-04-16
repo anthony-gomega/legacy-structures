@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 /* ------------------------------------------------------------------ */
 /*  Data                                                               */
@@ -42,11 +43,12 @@ const inventoryItems: InventoryItem[] = [
     cashPrice: 3120.0,
     salePrice: 2964.0,
     rto36: 137.22,
-    rto48: 123.50,
+    rto48: 123.5,
     buildingType: "Chicken Coop",
     sidingColor: "Navajo",
     condition: "New",
-    image: "https://legacystructuresusa.com/wp-content/uploads/2025/07/IMG_0156-1753236054332-scaled.jpeg",
+    image:
+      "https://legacystructuresusa.com/wp-content/uploads/2025/07/IMG_0156-1753236054332-scaled.jpeg",
     designTemplate: "25",
   },
   {
@@ -66,7 +68,8 @@ const inventoryItems: InventoryItem[] = [
     buildingType: "Mini Barn",
     sidingColor: "Red",
     condition: "New",
-    image: "https://legacystructuresusa.com/wp-content/uploads/2025/10/IMG_0353-1760801572551-scaled.jpeg",
+    image:
+      "https://legacystructuresusa.com/wp-content/uploads/2025/10/IMG_0353-1760801572551-scaled.jpeg",
     designTemplate: "22",
   },
   {
@@ -86,7 +89,8 @@ const inventoryItems: InventoryItem[] = [
     buildingType: "Utility Shed",
     sidingColor: "Clay",
     condition: "New",
-    image: "https://legacystructuresusa.com/wp-content/uploads/2026/03/IMG_3336-1773796375925-scaled.jpeg",
+    image:
+      "https://legacystructuresusa.com/wp-content/uploads/2026/03/IMG_3336-1773796375925-scaled.jpeg",
     designTemplate: "25",
   },
   {
@@ -106,7 +110,8 @@ const inventoryItems: InventoryItem[] = [
     buildingType: "Utility Shed",
     sidingColor: "Red",
     condition: "New",
-    image: "https://legacystructuresusa.com/wp-content/uploads/2026/03/IMG_3330-1773795752495-scaled.jpeg",
+    image:
+      "https://legacystructuresusa.com/wp-content/uploads/2026/03/IMG_3330-1773795752495-scaled.jpeg",
     designTemplate: "25",
   },
   {
@@ -126,7 +131,8 @@ const inventoryItems: InventoryItem[] = [
     buildingType: "Lofted Barn",
     sidingColor: "Urethane Chestnut",
     condition: "New",
-    image: "https://legacystructuresusa.com/wp-content/uploads/2025/07/IMG_0201-1753236247376-scaled.jpeg",
+    image:
+      "https://legacystructuresusa.com/wp-content/uploads/2025/07/IMG_0201-1753236247376-scaled.jpeg",
     designTemplate: "23",
   },
   {
@@ -146,7 +152,8 @@ const inventoryItems: InventoryItem[] = [
     buildingType: "Single Slope",
     sidingColor: "Urethane Driftwood",
     condition: "Used",
-    image: "https://legacystructuresusa.com/wp-content/uploads/2025/03/IMG_8877-1741119643511-scaled.jpeg",
+    image:
+      "https://legacystructuresusa.com/wp-content/uploads/2025/03/IMG_8877-1741119643511-scaled.jpeg",
     designTemplate: "3",
   },
   {
@@ -161,12 +168,13 @@ const inventoryItems: InventoryItem[] = [
     inventoryNumber: "WLB-72669-1012-042825-C",
     cashPrice: 4495.0,
     salePrice: null,
-    rto36: 208.10,
+    rto36: 208.1,
     rto48: 187.29,
     buildingType: "Lofted Barn",
     sidingColor: "Urethane Driftwood",
     condition: "New",
-    image: "https://legacystructuresusa.com/wp-content/uploads/2025/10/IMG_0359-1760801846846-scaled.jpeg",
+    image:
+      "https://legacystructuresusa.com/wp-content/uploads/2025/10/IMG_0359-1760801846846-scaled.jpeg",
     designTemplate: "23",
   },
   {
@@ -186,7 +194,8 @@ const inventoryItems: InventoryItem[] = [
     buildingType: "Utility Shed",
     sidingColor: "Urethane Driftwood",
     condition: "New",
-    image: "https://legacystructuresusa.com/wp-content/uploads/2025/03/IMG_9653-1741118822925-scaled.jpeg",
+    image:
+      "https://legacystructuresusa.com/wp-content/uploads/2025/03/IMG_9653-1741118822925-scaled.jpeg",
     designTemplate: "25",
   },
   {
@@ -206,7 +215,8 @@ const inventoryItems: InventoryItem[] = [
     buildingType: "Lofted Barn",
     sidingColor: "Evergreen",
     condition: "New",
-    image: "https://legacystructuresusa.com/wp-content/uploads/2025/07/IMG_0123-1753211311664-scaled.jpeg",
+    image:
+      "https://legacystructuresusa.com/wp-content/uploads/2025/07/IMG_0123-1753211311664-scaled.jpeg",
     designTemplate: "23",
   },
 ];
@@ -263,7 +273,359 @@ function formatCurrency(amount: number) {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Component                                                          */
+/*  Red CTA Bar Component                                              */
+/* ------------------------------------------------------------------ */
+
+function PricingGuideCTA() {
+  return (
+    <div
+      style={{
+        background: "#b12029",
+        padding: "20px 0",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "30px",
+        flexWrap: "wrap",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "30px",
+          maxWidth: "1150px",
+          width: "100%",
+          justifyContent: "center",
+          padding: "0 20px",
+          flexWrap: "wrap",
+        }}
+      >
+        <img
+          src="https://legacystructuresusa.com/wp-content/themes/barndealer/assets/images/pricing-guide-cta-img.png"
+          alt="Pricing Guide"
+          style={{ height: "80px", width: "auto" }}
+        />
+        <span
+          style={{
+            color: "white",
+            fontSize: "24px",
+            fontWeight: "bold",
+            fontFamily: "Roboto, sans-serif",
+          }}
+        >
+          Get Your Free Pricing Guide
+        </span>
+        <a
+          href="#"
+          style={{
+            color: "#ffc800",
+            fontSize: "22px",
+            fontWeight: "bold",
+            textDecoration: "none",
+            fontFamily: "Roboto, sans-serif",
+          }}
+        >
+          Click Here!
+        </a>
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Price Box Component                                                */
+/* ------------------------------------------------------------------ */
+
+function PriceBox({
+  label,
+  children,
+}: {
+  label: React.ReactNode;
+  children: React.ReactNode;
+}) {
+  return (
+    <div
+      style={{
+        border: "2px solid #af0019",
+        display: "flex",
+        flexDirection: "column",
+        width: "auto",
+        flex: 1,
+        marginBottom: "15px",
+      }}
+    >
+      <div
+        style={{
+          fontWeight: "bold",
+          backgroundColor: "#af0019",
+          color: "white",
+          padding: "15px 10px",
+          textAlign: "center",
+          fontSize: "13px",
+          lineHeight: "1.3",
+        }}
+      >
+        {label}
+      </div>
+      <div
+        style={{
+          padding: "15px 10px",
+          textAlign: "center",
+          fontSize: "13px",
+        }}
+      >
+        {children}
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Inventory Item Component                                           */
+/* ------------------------------------------------------------------ */
+
+function InventoryItemRow({ item }: { item: InventoryItem }) {
+  const hasSale = item.salePrice !== null;
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        padding: "60px 20px",
+        borderTop: "2px solid #af0019",
+        maxWidth: "1150px",
+        margin: "auto",
+      }}
+    >
+      {/* img-wrapper */}
+      <div style={{ width: "30%" }}>
+        <Link href={`/building/${item.slug}`}>
+          <div
+            style={{
+              backgroundImage: `url('${item.image}')`,
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center center",
+              backgroundSize: "contain",
+              height: "250px",
+            }}
+          />
+        </Link>
+      </div>
+
+      {/* info-wrapper */}
+      <div style={{ width: "70%" }}>
+        {/* text-pricing-group */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-start",
+            paddingLeft: "20px",
+            minHeight: "225px",
+          }}
+        >
+          {/* text-info */}
+          <div style={{ width: "50%" }}>
+            <ul
+              style={{
+                listStyle: "none",
+                padding: 0,
+                margin: 0,
+                fontFamily: "Roboto, sans-serif",
+                fontSize: "15px",
+              }}
+            >
+              <li style={{ marginBottom: "10px", fontWeight: "bold" }}>
+                <span
+                  style={{
+                    color: "#194b7d",
+                    fontWeight: "bold",
+                    minWidth: "75px",
+                    display: "inline-block",
+                  }}
+                >
+                  Model:
+                </span>{" "}
+                <Link
+                  href={`/building/${item.slug}`}
+                  style={{ color: "#000", textDecoration: "none" }}
+                >
+                  {item.model}
+                </Link>
+              </li>
+              <li style={{ marginBottom: "10px", fontWeight: "bold" }}>
+                <span
+                  style={{
+                    color: "#194b7d",
+                    fontWeight: "bold",
+                    minWidth: "75px",
+                    display: "inline-block",
+                  }}
+                >
+                  Size:
+                </span>{" "}
+                {item.size}
+              </li>
+              <li style={{ marginBottom: "10px", fontWeight: "bold" }}>
+                <span
+                  style={{
+                    color: "#194b7d",
+                    fontWeight: "bold",
+                    minWidth: "75px",
+                    display: "inline-block",
+                  }}
+                >
+                  Walls:
+                </span>{" "}
+                {item.wallsColor}
+              </li>
+              <li style={{ marginBottom: "10px", fontWeight: "bold" }}>
+                <span
+                  style={{
+                    color: "#194b7d",
+                    fontWeight: "bold",
+                    minWidth: "75px",
+                    display: "inline-block",
+                  }}
+                >
+                  Trim:
+                </span>{" "}
+                {item.trimColor}
+              </li>
+              <li style={{ marginBottom: "10px", fontWeight: "bold" }}>
+                <span
+                  style={{
+                    color: "#194b7d",
+                    fontWeight: "bold",
+                    minWidth: "75px",
+                    display: "inline-block",
+                  }}
+                >
+                  Roof:
+                </span>{" "}
+                {item.roofColor}
+              </li>
+              <li
+                style={{
+                  marginBottom: "10px",
+                  fontWeight: "bold",
+                  color: "#af0019",
+                }}
+              >
+                <span
+                  style={{
+                    color: "#194b7d",
+                    fontWeight: "bold",
+                    minWidth: "75px",
+                    display: "inline-block",
+                  }}
+                >
+                  Inv #:
+                </span>{" "}
+                {item.inventoryNumber}
+              </li>
+            </ul>
+          </div>
+
+          {/* price-info */}
+          <div style={{ width: "44%" }}>
+            {/* pricing-section - HORIZONTAL ROW */}
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                gap: "2%",
+              }}
+            >
+              {/* Cash Price box */}
+              {hasSale ? (
+                <>
+                  <PriceBox label={<>Cash<br />Price</>}>
+                    <s>{formatCurrency(item.cashPrice)}</s>
+                  </PriceBox>
+                  <PriceBox label={<>Sale<br />Price</>}>
+                    <strong style={{ color: "#e32323" }}>
+                      {formatCurrency(item.salePrice!)} +tax
+                    </strong>
+                  </PriceBox>
+                </>
+              ) : (
+                <PriceBox label={<>Cash<br />Price</>}>
+                  <span>{formatCurrency(item.cashPrice)} +tax</span>
+                </PriceBox>
+              )}
+
+              {/* 36 Mo RTO */}
+              <PriceBox label={<>36 Mo.<br />RTO</>}>
+                {formatCurrency(item.rto36)} +tax
+              </PriceBox>
+
+              {/* 48 Mo RTO */}
+              <PriceBox label={<>48 Mo.<br />RTO</>}>
+                {formatCurrency(item.rto48)} +tax
+              </PriceBox>
+            </div>
+
+            {/* link-button */}
+            <div
+              style={{
+                display: "flex",
+                gap: "2%",
+                justifyContent: "center",
+                marginTop: "5px",
+              }}
+            >
+              <a
+                href={`https://orders.barnportal.com/myquote?dealerid=&dir=1&template=${item.designTemplate}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  background: "#00567a",
+                  color: "#ffc800",
+                  textDecoration: "none",
+                  padding: "10px 20px",
+                  borderRadius: "5px",
+                  textAlign: "center",
+                  textTransform: "uppercase",
+                  fontWeight: "bold",
+                  fontSize: "13px",
+                  fontFamily: "Roboto, sans-serif",
+                }}
+              >
+                Design Your Own!
+              </a>
+              <Link
+                href={`/building/${item.slug}`}
+                style={{
+                  background: "#00567a",
+                  color: "#ffc800",
+                  textDecoration: "none",
+                  padding: "10px 20px",
+                  borderRadius: "5px",
+                  textAlign: "center",
+                  textTransform: "uppercase",
+                  fontWeight: "bold",
+                  fontSize: "13px",
+                  fontFamily: "Roboto, sans-serif",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                Want This Building?
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Main Page Component                                                */
 /* ------------------------------------------------------------------ */
 
 export default function InventoryPage() {
@@ -282,7 +644,8 @@ export default function InventoryPage() {
     if (filterLength) result = result.filter((i) => i.length === filterLength);
     if (filterType) result = result.filter((i) => i.buildingType === filterType);
     if (filterColor) result = result.filter((i) => i.sidingColor === filterColor);
-    if (filterCondition) result = result.filter((i) => i.condition === filterCondition);
+    if (filterCondition)
+      result = result.filter((i) => i.condition === filterCondition);
 
     result.sort((a, b) => {
       const priceA = a.salePrice ?? a.cashPrice;
@@ -303,24 +666,51 @@ export default function InventoryPage() {
   }
 
   return (
-    <div className="wrapper" style={{ padding: 0 }}>
-      {/* Page Header */}
-      <div className="border-t-[5px] border-[#00567a]">
-        <div className="max-w-[1100px] mx-auto px-[20px] py-[10px]">
-          <h1>Current Storage Buildings for Sale in Hudson Falls</h1>
-        </div>
-      </div>
-
-      {/* Filter Toggle */}
-      <div className="max-w-[1100px] mx-auto px-[20px]">
-        <button
-          id="toggle-filters"
-          onClick={() => setFiltersOpen(!filtersOpen)}
-          className="flex items-center gap-[8px] bg-white border border-[#ccc] rounded px-[15px] py-[8px] text-[16px] font-bold cursor-pointer mb-[10px]"
+    <div style={{ background: "#fff", minHeight: "100vh" }}>
+      {/* wrapper blue-top */}
+      <div style={{ borderTop: "5px solid #00567a" }}>
+        {/* Page Heading */}
+        <h1
+          style={{
+            textAlign: "center",
+            color: "#00567a",
+            fontFamily: "'Tungsten Semibold', 'Oswald', sans-serif",
+            fontSize: "50px",
+            fontWeight: 600,
+            margin: "30px auto 20px",
+            padding: "0 20px",
+            lineHeight: 1.1,
+          }}
         >
-          <span>Filters</span>
-          <span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor">
+          Current Storage Buildings for Sale in Hudson Falls
+        </h1>
+
+        {/* Filter Toggle */}
+        <div style={{ maxWidth: "1150px", margin: "0 auto", padding: "0 20px" }}>
+          <button
+            onClick={() => setFiltersOpen(!filtersOpen)}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "8px",
+              background: "#fff",
+              border: "1px solid #ccc",
+              borderRadius: "4px",
+              padding: "8px 15px",
+              fontSize: "16px",
+              fontWeight: "bold",
+              cursor: "pointer",
+              marginBottom: "10px",
+              fontFamily: "Roboto, sans-serif",
+            }}
+          >
+            <span>Filters</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="currentColor"
+            >
               <circle cx="4" cy="6" r="2" />
               <rect x="8" y="5" width="12" height="2" rx="1" />
               <circle cx="4" cy="12" r="2" />
@@ -328,268 +718,328 @@ export default function InventoryPage() {
               <circle cx="4" cy="18" r="2" />
               <rect x="8" y="17" width="12" height="2" rx="1" />
             </svg>
-          </span>
-        </button>
+          </button>
 
-        {/* Filter Panel */}
-        {filtersOpen && (
-          <div className="bg-white border border-[#ccc] rounded p-[20px] mb-[20px] flex flex-wrap gap-[15px] items-end">
-            {/* Width */}
-            <div className="flex flex-col gap-[4px]">
-              <strong className="text-[14px]">Width</strong>
-              <div className="flex flex-col gap-[2px]">
-                {WIDTH_OPTIONS.map((w) => (
-                  <label key={w} className="flex items-center gap-[6px] text-[14px] cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={filterWidth === w}
-                      onChange={() => setFilterWidth(filterWidth === w ? null : w)}
-                    />
-                    {w}
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            {/* Length */}
-            <div className="flex flex-col gap-[4px]">
-              <strong className="text-[14px]">Length</strong>
-              <div className="flex flex-col gap-[2px]">
-                {LENGTH_OPTIONS.map((l) => (
-                  <label key={l} className="flex items-center gap-[6px] text-[14px] cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={filterLength === l}
-                      onChange={() => setFilterLength(filterLength === l ? null : l)}
-                    />
-                    {l}
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            {/* Building Type */}
-            <div className="flex flex-col gap-[4px]">
-              <strong className="text-[14px]">Building Type</strong>
-              <div className="flex flex-col gap-[2px]">
-                {BUILDING_TYPE_OPTIONS.map((t) => (
-                  <label key={t} className="flex items-center gap-[6px] text-[14px] cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={filterType === t}
-                      onChange={() => setFilterType(filterType === t ? "" : t)}
-                    />
-                    {t}
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            {/* Siding Color */}
-            <div className="flex flex-col gap-[4px]">
-              <strong className="text-[14px]">Siding Color</strong>
-              <div className="flex flex-col gap-[2px]">
-                {SIDING_COLOR_OPTIONS.map((c) => (
-                  <label key={c} className="flex items-center gap-[6px] text-[14px] cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={filterColor === c}
-                      onChange={() => setFilterColor(filterColor === c ? "" : c)}
-                    />
-                    {c}
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            {/* Condition */}
-            <div className="flex flex-col gap-[4px]">
-              <strong className="text-[14px]">Condition</strong>
-              <div className="flex flex-col gap-[2px]">
-                {CONDITION_OPTIONS.map((c) => (
-                  <label key={c} className="flex items-center gap-[6px] text-[14px] cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={filterCondition === c}
-                      onChange={() => setFilterCondition(filterCondition === c ? "" : c)}
-                    />
-                    {c}
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            {/* Sort By Price */}
-            <div className="flex flex-col gap-[4px]">
-              <strong className="text-[14px]">Sort By Price</strong>
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="border border-[#ccc] rounded px-[15px] py-[5px] text-[14px]"
-              >
-                <option value="ASC">Low to High</option>
-                <option value="DESC">High to Low</option>
-              </select>
-            </div>
-
-            {/* Buttons */}
-            <div className="flex gap-[10px] items-center">
-              <button
-                onClick={() => setFiltersOpen(false)}
-                className="bg-[#00567a] text-white font-bold px-[20px] py-[8px] rounded text-[14px] cursor-pointer"
-              >
-                Apply Filters
-              </button>
-              <button
-                onClick={clearFilters}
-                className="text-[#00567a] text-[14px] cursor-pointer underline bg-transparent border-none"
-              >
-                Clear Filters
-              </button>
-            </div>
-          </div>
-        )}
-      </div>
-
-      {/* Inventory Items */}
-      <div className="max-w-[1100px] mx-auto px-[20px]" style={{ padding: 0 }}>
-        <div className="inv-wrapper">
-          {filtered.length === 0 ? (
-            <div className="py-[60px] px-[20px] text-center">
-              <p className="text-[18px] text-gray-500">No buildings match your current filters.</p>
-              <button onClick={clearFilters} className="text-[#00567a] underline mt-[10px] bg-transparent border-none cursor-pointer">
-                Clear all filters
-              </button>
-            </div>
-          ) : (
-            filtered.map((item) => (
-              <div
-                key={item.inventoryNumber}
-                className="flex flex-col md:flex-row justify-between py-[60px] px-[20px] border-t-[2px] border-[#af0019]"
-              >
-                {/* Image */}
-                <div className="w-full md:w-[30%] mb-[20px] md:mb-0">
-                  <Link href={`/building/${item.slug}`}>
-                    <div
-                      className="h-[250px] bg-no-repeat bg-center"
+          {/* Filter Panel */}
+          {filtersOpen && (
+            <div
+              style={{
+                background: "#fff",
+                border: "1px solid #ccc",
+                borderRadius: "4px",
+                padding: "20px",
+                marginBottom: "20px",
+                display: "flex",
+                flexWrap: "wrap",
+                gap: "15px",
+                alignItems: "flex-end",
+                fontFamily: "Roboto, sans-serif",
+              }}
+            >
+              {/* Width */}
+              <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                <strong style={{ fontSize: "14px" }}>Width</strong>
+                <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+                  {WIDTH_OPTIONS.map((w) => (
+                    <label
+                      key={w}
                       style={{
-                        backgroundImage: `url('${item.image}')`,
-                        backgroundSize: "contain",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "6px",
+                        fontSize: "14px",
+                        cursor: "pointer",
                       }}
-                    />
-                  </Link>
-                </div>
-
-                {/* Info */}
-                <div className="w-full md:w-[70%]">
-                  <div className="flex flex-col md:flex-row justify-between items-start pl-0 md:pl-[20px] min-h-[225px]">
-                    {/* Text Info */}
-                    <div className="w-full md:w-[50%]">
-                      <ul className="list-none p-0 m-0 text-[16px] leading-[28px]">
-                        <li>
-                          <span className="text-[#194b7d] font-bold inline-block min-w-[75px]">Model:</span>{" "}
-                          <Link href={`/building/${item.slug}`} className="no-underline">
-                            {item.model}
-                          </Link>
-                        </li>
-                        <li>
-                          <span className="text-[#194b7d] font-bold inline-block min-w-[75px]">Size:</span>{" "}
-                          {item.size}
-                        </li>
-                        <li>
-                          <span className="text-[#194b7d] font-bold inline-block min-w-[75px]">Walls:</span>{" "}
-                          {item.wallsColor}
-                        </li>
-                        <li>
-                          <span className="text-[#194b7d] font-bold inline-block min-w-[75px]">Trim:</span>{" "}
-                          {item.trimColor}
-                        </li>
-                        <li>
-                          <span className="text-[#194b7d] font-bold inline-block min-w-[75px]">Roof:</span>{" "}
-                          {item.roofColor}
-                        </li>
-                        <li className="text-[#af0019]">
-                          <span className="text-[#194b7d] font-bold inline-block min-w-[75px]">Inv #:</span>{" "}
-                          {item.inventoryNumber}
-                        </li>
-                      </ul>
-                    </div>
-
-                    {/* Price Info */}
-                    <div className="w-full md:w-[44%] flex flex-col items-center mt-[15px] md:mt-0">
-                      <div className="flex flex-col w-full">
-                        {/* Cash Price */}
-                        <div className="border-[2px] border-[#af0019] flex flex-col w-full mb-[15px]">
-                          <div className="font-bold bg-[#af0019] text-white py-[15px] px-[10px] w-full text-center">
-                            Cash<br />Price
-                          </div>
-                          <div className="py-[15px] px-[10px] text-center">
-                            {item.salePrice ? (
-                              <s>{formatCurrency(item.cashPrice)}</s>
-                            ) : (
-                              <span>{formatCurrency(item.cashPrice)} +tax</span>
-                            )}
-                          </div>
-                        </div>
-
-                        {/* Sale Price (if applicable) */}
-                        {item.salePrice && (
-                          <div className="border-[2px] border-[#af0019] flex flex-col w-full mb-[15px]">
-                            <div className="font-bold bg-[#af0019] text-white py-[15px] px-[10px] w-full text-center">
-                              Sale<br />Price
-                            </div>
-                            <div className="py-[15px] px-[10px] text-center">
-                              <strong className="text-[#e32323]">
-                                {formatCurrency(item.salePrice)} +tax
-                              </strong>
-                            </div>
-                          </div>
-                        )}
-
-                        {/* 36 Mo RTO */}
-                        <div className="border-[2px] border-[#af0019] flex flex-col w-full mb-[15px]">
-                          <div className="font-bold bg-[#af0019] text-white py-[15px] px-[10px] w-full text-center">
-                            36 Mo.<br /> RTO
-                          </div>
-                          <div className="py-[15px] px-[10px] text-center">
-                            {formatCurrency(item.rto36)} +tax
-                          </div>
-                        </div>
-
-                        {/* 48 Mo RTO */}
-                        <div className="border-[2px] border-[#af0019] flex flex-col w-full mb-[15px]">
-                          <div className="font-bold bg-[#af0019] text-white py-[15px] px-[10px] w-full text-center">
-                            48 Mo. RTO
-                          </div>
-                          <div className="py-[15px] px-[10px] text-center">
-                            {formatCurrency(item.rto48)} +tax
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Action Buttons */}
-                      <div className="flex w-[100%] md:w-[70%] ml-auto gap-[2%] justify-center">
-                        <a
-                          href={`https://orders.barnportal.com/myquote?dealerid=&dir=1&template=${item.designTemplate}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="bg-[#00567a] text-[#ffc800] no-underline py-[10px] px-[20px] rounded-md uppercase w-full text-center font-bold text-[14px] leading-[18px]"
-                        >
-                          Design<br />Your Own!
-                        </a>
-                        <Link
-                          href={`/building/${item.slug}`}
-                          className="bg-[#00567a] text-[#ffc800] no-underline py-[10px] px-[20px] rounded-md uppercase w-full text-center font-bold text-[14px] leading-[18px] flex items-center justify-center"
-                        >
-                          Want This Building?
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
+                    >
+                      <input
+                        type="checkbox"
+                        checked={filterWidth === w}
+                        onChange={() => setFilterWidth(filterWidth === w ? null : w)}
+                      />
+                      {w}
+                    </label>
+                  ))}
                 </div>
               </div>
-            ))
+
+              {/* Length */}
+              <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                <strong style={{ fontSize: "14px" }}>Length</strong>
+                <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+                  {LENGTH_OPTIONS.map((l) => (
+                    <label
+                      key={l}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "6px",
+                        fontSize: "14px",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={filterLength === l}
+                        onChange={() =>
+                          setFilterLength(filterLength === l ? null : l)
+                        }
+                      />
+                      {l}
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* Building Type */}
+              <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                <strong style={{ fontSize: "14px" }}>Building Type</strong>
+                <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+                  {BUILDING_TYPE_OPTIONS.map((t) => (
+                    <label
+                      key={t}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "6px",
+                        fontSize: "14px",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={filterType === t}
+                        onChange={() => setFilterType(filterType === t ? "" : t)}
+                      />
+                      {t}
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* Siding Color */}
+              <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                <strong style={{ fontSize: "14px" }}>Siding Color</strong>
+                <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+                  {SIDING_COLOR_OPTIONS.map((c) => (
+                    <label
+                      key={c}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "6px",
+                        fontSize: "14px",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={filterColor === c}
+                        onChange={() =>
+                          setFilterColor(filterColor === c ? "" : c)
+                        }
+                      />
+                      {c}
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* Condition */}
+              <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                <strong style={{ fontSize: "14px" }}>Condition</strong>
+                <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+                  {CONDITION_OPTIONS.map((c) => (
+                    <label
+                      key={c}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "6px",
+                        fontSize: "14px",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={filterCondition === c}
+                        onChange={() =>
+                          setFilterCondition(filterCondition === c ? "" : c)
+                        }
+                      />
+                      {c}
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* Sort By Price */}
+              <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                <strong style={{ fontSize: "14px" }}>Sort By Price</strong>
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                  style={{
+                    border: "1px solid #ccc",
+                    borderRadius: "4px",
+                    padding: "5px 15px",
+                    fontSize: "14px",
+                  }}
+                >
+                  <option value="ASC">Low to High</option>
+                  <option value="DESC">High to Low</option>
+                </select>
+              </div>
+
+              {/* Buttons */}
+              <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+                <button
+                  onClick={() => setFiltersOpen(false)}
+                  style={{
+                    background: "#00567a",
+                    color: "#fff",
+                    fontWeight: "bold",
+                    padding: "8px 20px",
+                    borderRadius: "4px",
+                    fontSize: "14px",
+                    cursor: "pointer",
+                    border: "none",
+                  }}
+                >
+                  Apply Filters
+                </button>
+                <button
+                  onClick={clearFilters}
+                  style={{
+                    color: "#00567a",
+                    fontSize: "14px",
+                    cursor: "pointer",
+                    textDecoration: "underline",
+                    background: "transparent",
+                    border: "none",
+                  }}
+                >
+                  Clear Filters
+                </button>
+              </div>
+            </div>
           )}
+        </div>
+
+        {/* Inventory Items */}
+        {filtered.length === 0 ? (
+          <div
+            style={{
+              padding: "60px 20px",
+              textAlign: "center",
+              maxWidth: "1150px",
+              margin: "auto",
+            }}
+          >
+            <p
+              style={{
+                fontSize: "18px",
+                color: "#888",
+                fontFamily: "Roboto, sans-serif",
+              }}
+            >
+              No buildings match your current filters.
+            </p>
+            <button
+              onClick={clearFilters}
+              style={{
+                color: "#00567a",
+                textDecoration: "underline",
+                marginTop: "10px",
+                background: "transparent",
+                border: "none",
+                cursor: "pointer",
+                fontSize: "16px",
+              }}
+            >
+              Clear all filters
+            </button>
+          </div>
+        ) : (
+          <>
+            {filtered.map((item, index) => (
+              <div key={item.inventoryNumber}>
+                <InventoryItemRow item={item} />
+                {/* Red CTA bar after every 5 items */}
+                {(index + 1) % 5 === 0 && index < filtered.length - 1 && (
+                  <PricingGuideCTA />
+                )}
+              </div>
+            ))}
+          </>
+        )}
+
+        {/* Pagination */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "8px",
+            padding: "40px 20px",
+            fontFamily: "Roboto, sans-serif",
+            fontSize: "16px",
+          }}
+        >
+          <span
+            style={{
+              padding: "8px 14px",
+              background: "#00567a",
+              color: "#fff",
+              borderRadius: "3px",
+              fontWeight: "bold",
+            }}
+          >
+            1
+          </span>
+          <a
+            href="#"
+            style={{
+              padding: "8px 14px",
+              color: "#00567a",
+              textDecoration: "none",
+              borderRadius: "3px",
+            }}
+          >
+            2
+          </a>
+          <a
+            href="#"
+            style={{
+              padding: "8px 14px",
+              color: "#00567a",
+              textDecoration: "none",
+              borderRadius: "3px",
+            }}
+          >
+            3
+          </a>
+          <a
+            href="#"
+            style={{
+              padding: "8px 14px",
+              color: "#00567a",
+              textDecoration: "none",
+              borderRadius: "3px",
+            }}
+          >
+            4
+          </a>
+          <a
+            href="#"
+            style={{
+              padding: "8px 14px",
+              color: "#00567a",
+              textDecoration: "none",
+              borderRadius: "3px",
+            }}
+          >
+            Next &gt;
+          </a>
         </div>
       </div>
     </div>
