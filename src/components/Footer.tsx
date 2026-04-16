@@ -1,10 +1,79 @@
 export default function Footer() {
   return (
     <footer>
+      {/* Hover styles */}
+      <style>{`
+        .cta-phone-link {
+          font-weight: bold;
+          font-size: 36px;
+          color: #fabe08;
+          text-decoration: none;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          position: relative;
+          transition: color 0.3s ease;
+        }
+        .cta-phone-link::after {
+          content: '';
+          position: absolute;
+          bottom: -2px;
+          left: 0;
+          width: 0;
+          height: 2px;
+          background: #fabe08;
+          transition: width 0.3s ease;
+        }
+        .cta-phone-link:hover {
+          color: #fcd44a;
+        }
+        .cta-phone-link:hover::after {
+          width: 100%;
+        }
+        .social-icon {
+          max-height: 40px;
+          border-radius: 5px;
+          opacity: 0.7;
+          transition: opacity 0.3s ease;
+        }
+        .social-icon:hover {
+          opacity: 1;
+        }
+        .dealer-logo {
+          max-width: 250px;
+          height: auto;
+          transition: transform 0.3s ease;
+        }
+        .dealer-logo:hover {
+          transform: scale(1.05);
+        }
+        .footer-grid {
+          max-width: 1150px;
+          margin: 0 auto;
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 20px;
+        }
+        @media (max-width: 768px) {
+          .footer-grid {
+            grid-template-columns: 1fr;
+          }
+          .footer-grid > div {
+            border-right: none !important;
+            border-bottom: 1px solid rgba(0,86,122,0.15);
+            padding-bottom: 24px !important;
+            padding-right: 0 !important;
+          }
+          .footer-grid > div:last-child {
+            border-bottom: none;
+          }
+        }
+      `}</style>
+
       {/* CTA Call bar */}
       <div
         style={{
-          background: "#03597c",
+          background: "linear-gradient(to bottom, #03597c, #004d6b)",
           padding: "20px",
         }}
       >
@@ -23,23 +92,28 @@ export default function Footer() {
           <div
             style={{
               fontWeight: "bold",
-              fontSize: "40px",
+              fontSize: "32px",
               fontFamily: 'var(--font-oswald), "Oswald", sans-serif',
               letterSpacing: "1.5px",
             }}
           >
             Speak with a shed expert today!
           </div>
-          <div style={{ fontSize: "40px" }}>
+          <div>
             <a
               href="tel:518-544-2889"
-              style={{
-                fontWeight: "bold",
-                fontSize: "40px",
-                color: "#fabe08",
-                textDecoration: "none",
-              }}
+              className="cta-phone-link"
             >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                style={{ flexShrink: 0 }}
+              >
+                <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1.003 1.003 0 011.01-.24c1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.1.31.03.66-.25 1.02l-2.2 2.2z" />
+              </svg>
               518-544-2889
             </a>
           </div>
@@ -54,22 +128,25 @@ export default function Footer() {
           padding: "40px 20px 0",
         }}
       >
-        <div
-          className="footer-columns"
-          style={{
-            maxWidth: "1150px",
-            margin: "0 auto",
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "flex-start",
-            flexWrap: "wrap",
-            gap: "20px",
-          }}
-        >
+        <div className="footer-grid">
           {/* Column 1: Location info */}
-          <div>
-            <p style={{ fontWeight: "bold", paddingBottom: "5px", lineHeight: "1.6" }}>
+          <div
+            style={{
+              borderRight: "1px solid rgba(0,86,122,0.15)",
+              paddingRight: "20px",
+            }}
+          >
+            <p
+              style={{
+                fontWeight: "bold",
+                fontSize: "20px",
+                paddingBottom: "8px",
+                lineHeight: "1.6",
+                borderBottom: "2px solid #00567a",
+                display: "inline-block",
+                marginBottom: "8px",
+              }}
+            >
               Legacy Structures
             </p>
             <p style={{ paddingBottom: "0", lineHeight: "1.6" }}>3570 US 4</p>
@@ -105,7 +182,7 @@ export default function Footer() {
                 <img
                   src="https://legacystructuresusa.com/wp-content/themes/barndealer/assets/images/icon-fb.png"
                   alt="Facebook"
-                  style={{ maxHeight: "35px", borderRadius: "5px" }}
+                  className="social-icon"
                 />
               </a>
               <a
@@ -117,7 +194,7 @@ export default function Footer() {
                 <img
                   src="https://legacystructuresusa.com/wp-content/themes/barndealer/assets/images/icon-ig.png"
                   alt="Instagram"
-                  style={{ maxHeight: "35px", borderRadius: "5px" }}
+                  className="social-icon"
                 />
               </a>
               <a href="mailto:legacystructures25@gmail.com">
@@ -125,46 +202,74 @@ export default function Footer() {
                 <img
                   src="https://legacystructuresusa.com/wp-content/themes/barndealer/assets/images/icon-email.png"
                   alt="Email"
-                  style={{ maxHeight: "35px", borderRadius: "5px" }}
+                  className="social-icon"
                 />
               </a>
             </div>
           </div>
 
           {/* Column 2: Dealer logo */}
-          <div style={{ textAlign: "center" }}>
+          <div
+            style={{
+              textAlign: "center",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              borderRight: "1px solid rgba(0,86,122,0.15)",
+              paddingRight: "20px",
+            }}
+          >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="https://legacystructuresusa.com/wp-content/themes/barndealer/assets/images/backyardoutfitters-logo-1.png"
               alt="Backyard Outfitters"
-              style={{ maxWidth: "250px", height: "auto" }}
+              className="dealer-logo"
             />
           </div>
 
           {/* Column 3: Business hours */}
           <div>
-            <p style={{ fontWeight: "bold", paddingBottom: "5px", lineHeight: "1.6" }}>
-              BUSINESS HOURS
-            </p>
-            <p style={{ paddingBottom: "0", lineHeight: "1.6" }}>
-              Monday: By Appointment
-            </p>
-            <p style={{ paddingBottom: "0", lineHeight: "1.6" }}>
-              Tuesday: 9:00 to 5:00
-            </p>
-            <p style={{ paddingBottom: "0", lineHeight: "1.6" }}>
-              Wednesday: By Appointment
-            </p>
-            <p style={{ paddingBottom: "0", lineHeight: "1.6" }}>
-              Thursday: By Appointment
-            </p>
-            <p style={{ paddingBottom: "0", lineHeight: "1.6" }}>
-              Friday: By Appointment
-            </p>
-            <p style={{ paddingBottom: "0", lineHeight: "1.6" }}>
-              Saturday: By Appointment
-            </p>
-            <p style={{ paddingBottom: "0", lineHeight: "1.6" }}>Sunday: Closed</p>
+            <div
+              style={{
+                background: "#e3e1db",
+                borderRadius: "8px",
+                padding: "16px 20px",
+              }}
+            >
+              <p
+                style={{
+                  fontWeight: "bold",
+                  paddingBottom: "8px",
+                  lineHeight: "1.6",
+                  marginBottom: "4px",
+                }}
+              >
+                BUSINESS HOURS
+              </p>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "auto 1fr",
+                  gap: "2px 12px",
+                  lineHeight: "1.6",
+                }}
+              >
+                <span>Monday:</span>
+                <span>By Appointment</span>
+                <span>Tuesday:</span>
+                <span>9:00 to 5:00</span>
+                <span>Wednesday:</span>
+                <span>By Appointment</span>
+                <span>Thursday:</span>
+                <span>By Appointment</span>
+                <span>Friday:</span>
+                <span>By Appointment</span>
+                <span>Saturday:</span>
+                <span>By Appointment</span>
+                <span>Sunday:</span>
+                <span>Closed</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -177,7 +282,8 @@ export default function Footer() {
           color: "#00567a",
           fontSize: "12px",
           fontWeight: 300,
-          padding: "20px 0",
+          padding: "24px 0",
+          borderTop: "1px solid rgba(0,86,122,0.1)",
         }}
       >
         &copy;2026 Legacy Structures All Rights Reserved.

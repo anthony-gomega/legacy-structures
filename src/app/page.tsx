@@ -28,16 +28,55 @@ const materials = [
   { label: "H", text: '5/8" treated floor decking' },
 ];
 
+/* Keyframes injected via style tag for pulse animation */
+const styleTag = `
+@keyframes pulseBtn {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+.cta-gold-btn {
+  display: inline-block;
+  background-color: #ffc800;
+  color: #000;
+  text-transform: uppercase;
+  padding: 14px 32px;
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 9999px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
+}
+.cta-gold-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+}
+`;
+
+/* Diagonal stripe pattern as inline SVG data URI */
+const diagonalPattern =
+  "url(\"data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 40L40 0' stroke='rgba(255,255,255,0.06)' stroke-width='1'/%3E%3Cpath d='M-10 10L10 -10' stroke='rgba(255,255,255,0.06)' stroke-width='1'/%3E%3Cpath d='M30 50L50 30' stroke='rgba(255,255,255,0.06)' stroke-width='1'/%3E%3C/svg%3E\")";
+
 export default function Home() {
   return (
     <div>
+      <style dangerouslySetInnerHTML={{ __html: styleTag }} />
+
       {/* ===== Section 1: Hero Slider ===== */}
       <div style={{ overflow: "hidden", position: "relative" }}>
         <HeroSlider />
       </div>
 
       {/* ===== Section 2: Red Two-Column CTA ===== */}
-      <section style={{ backgroundColor: "#af1919" }}>
+      <section
+        style={{
+          backgroundColor: "#af1919",
+          backgroundImage: diagonalPattern,
+          backgroundRepeat: "repeat",
+        }}
+      >
         <div
           style={{
             maxWidth: "1150px",
@@ -53,7 +92,8 @@ export default function Home() {
               flexDirection: "column",
               alignItems: "center",
               padding: "30px",
-              borderRight: "1px solid #fff",
+              borderRight: "1px solid rgba(255,255,255,0.2)",
+              border: "1px solid rgba(255,255,255,0.2)",
             }}
           >
             <h2
@@ -88,23 +128,16 @@ export default function Home() {
               <img
                 src="https://legacystructuresusa.com/wp-content/themes/barndealer/assets/images/3d-shed-builder-screen.png"
                 alt="3D Shed Builder"
-                style={{ maxWidth: "100%" }}
+                style={{
+                  maxWidth: "100%",
+                  border: "3px solid rgba(255,255,255,0.3)",
+                  borderRadius: "8px",
+                }}
               />
             </div>
             <a
               href="https://orders.barnportal.com/myquote?dealerid=&dir=1&template=1"
-              style={{
-                display: "inline-block",
-                backgroundColor: "#ffc800",
-                color: "#000",
-                textTransform: "uppercase",
-                padding: "10px 20px",
-                marginTop: "20px",
-                fontSize: "18px",
-                fontWeight: "bold",
-                textDecoration: "none",
-                borderRadius: "3px",
-              }}
+              className="cta-gold-btn"
             >
               Design Your Shed
             </a>
@@ -118,7 +151,7 @@ export default function Home() {
               flexDirection: "column",
               alignItems: "center",
               padding: "30px",
-              borderLeft: "1px solid #fff",
+              border: "1px solid rgba(255,255,255,0.2)",
             }}
           >
             <h2
@@ -153,23 +186,16 @@ export default function Home() {
               <img
                 src="https://legacystructuresusa.com/wp-content/themes/barndealer/assets/images/view-inventory-sheds.png"
                 alt="View Our Inventory"
-                style={{ maxWidth: "100%" }}
+                style={{
+                  maxWidth: "100%",
+                  border: "3px solid rgba(255,255,255,0.3)",
+                  borderRadius: "8px",
+                }}
               />
             </div>
             <Link
               href="/inventory"
-              style={{
-                display: "inline-block",
-                backgroundColor: "#ffc800",
-                color: "#000",
-                textTransform: "uppercase",
-                padding: "10px 20px",
-                marginTop: "20px",
-                fontSize: "18px",
-                fontWeight: "bold",
-                textDecoration: "none",
-                borderRadius: "3px",
-              }}
+              className="cta-gold-btn"
             >
               View Our Inventory
             </Link>
@@ -202,11 +228,12 @@ export default function Home() {
             style={{
               color: "#fff",
               fontFamily: 'var(--font-oswald), "Oswald", sans-serif',
-              fontSize: "40px",
+              fontSize: "32px",
               fontWeight: "bold",
               textTransform: "uppercase",
               textDecoration: "none",
-              letterSpacing: "1.5px",
+              letterSpacing: "2px",
+              textShadow: "0 2px 4px rgba(0,0,0,0.3)",
             }}
           >
             high quality materials and superior craftsmanship
@@ -215,7 +242,7 @@ export default function Home() {
       </section>
 
       {/* ===== Section 5: Pricing Guide ===== */}
-      <section style={{ backgroundColor: "#eae9e4", padding: "40px 20px" }}>
+      <section style={{ backgroundColor: "#eae9e4", padding: "40px 20px", borderRadius: "8px" }}>
         <h2
           style={{
             textAlign: "center",
@@ -277,6 +304,7 @@ export default function Home() {
                 height: "60px",
                 margin: "0 auto",
                 textTransform: "uppercase",
+                animation: "pulseBtn 3s ease-in-out infinite",
               }}
             >
               DOWNLOAD HERE!
@@ -295,11 +323,12 @@ export default function Home() {
             style={{
               color: "#fff",
               fontFamily: 'var(--font-oswald), "Oswald", sans-serif',
-              fontSize: "40px",
+              fontSize: "32px",
               fontWeight: "bold",
               textTransform: "uppercase",
               textDecoration: "none",
-              letterSpacing: "1.5px",
+              letterSpacing: "2px",
+              textShadow: "0 2px 4px rgba(0,0,0,0.3)",
             }}
           >
             Learn More About Our 5 Year Warranty!{" "}
@@ -340,22 +369,26 @@ export default function Home() {
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  marginTop: "20px",
+                  marginTop: "12px",
+                  backgroundColor: "#f8f8f8",
+                  borderRadius: "8px",
+                  padding: "12px 16px",
                 }}
               >
                 <div
                   style={{
                     backgroundColor: "#c81100",
                     borderRadius: "50%",
-                    width: "20px",
-                    height: "20px",
-                    minWidth: "20px",
+                    width: "28px",
+                    height: "28px",
+                    minWidth: "28px",
                     color: "#fff",
-                    fontSize: "12px",
+                    fontSize: "13px",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     fontWeight: "bold",
+                    boxShadow: "0 2px 4px rgba(0,0,0,0.15)",
                   }}
                 >
                   {item.label}
@@ -364,7 +397,7 @@ export default function Home() {
                   style={{
                     fontSize: "16px",
                     textAlign: "left",
-                    marginLeft: "20px",
+                    marginLeft: "16px",
                   }}
                 >
                   {item.text}
@@ -378,7 +411,12 @@ export default function Home() {
             <img
               src="https://legacystructuresusa.com/wp-content/themes/barndealer/assets/images/barn-interior-img.png"
               alt="Barn interior showing construction quality"
-              style={{ width: "100%", height: "auto" }}
+              style={{
+                width: "100%",
+                height: "auto",
+                borderRadius: "8px",
+                boxShadow: "0 4px 16px rgba(0,0,0,0.12)",
+              }}
             />
           </div>
         </div>

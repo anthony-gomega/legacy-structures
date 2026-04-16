@@ -39,15 +39,22 @@ export default function FeaturedCarousel({ sheds }: { sheds: FeaturedShed[] }) {
   const startIdx = page * itemsPerPage;
   const visible = sheds.slice(startIdx, startIdx + itemsPerPage);
 
+  const arrowStyle: React.CSSProperties = {
+    backgroundColor: "rgba(255,255,255,0.2)",
+    backdropFilter: "blur(4px)",
+    WebkitBackdropFilter: "blur(4px)",
+  };
+
   return (
     <div className="relative">
       {/* Prev Arrow */}
       <button
         onClick={prev}
         aria-label="Previous featured sheds"
-        className="absolute -left-5 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white w-10 h-10 flex items-center justify-center rounded-full transition-colors cursor-pointer"
+        className="absolute -left-5 top-1/2 -translate-y-1/2 z-10 text-white w-10 h-10 flex items-center justify-center rounded-full transition-all cursor-pointer"
+        style={arrowStyle}
       >
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <polyline points="15 18 9 12 15 6" />
         </svg>
       </button>
@@ -56,9 +63,10 @@ export default function FeaturedCarousel({ sheds }: { sheds: FeaturedShed[] }) {
       <button
         onClick={next}
         aria-label="Next featured sheds"
-        className="absolute -right-5 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white w-10 h-10 flex items-center justify-center rounded-full transition-colors cursor-pointer"
+        className="absolute -right-5 top-1/2 -translate-y-1/2 z-10 text-white w-10 h-10 flex items-center justify-center rounded-full transition-all cursor-pointer"
+        style={arrowStyle}
       >
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <polyline points="9 6 15 12 9 18" />
         </svg>
       </button>
@@ -66,25 +74,45 @@ export default function FeaturedCarousel({ sheds }: { sheds: FeaturedShed[] }) {
       {/* Items */}
       <div className="grid grid-cols-3 gap-4">
         {visible.map((shed, i) => (
-          <Link key={`${shed.href}-${startIdx + i}`} href={shed.href} className="block">
+          <Link key={`${shed.href}-${startIdx + i}`} href={shed.href} className="block group">
             <div
-              className="thumb bg-cover bg-center"
               style={{
-                backgroundImage: `url(${shed.image})`,
-                height: "250px",
+                borderRadius: "8px",
+                overflow: "hidden",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+                transition: "transform 0.3s ease, box-shadow 0.3s ease",
               }}
-            />
-            <div
-              className="info text-white text-center"
-              style={{
-                backgroundColor: "#00567a",
-                padding: "20px",
-                fontSize: "16px",
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "scale(1.02)";
+                e.currentTarget.style.boxShadow = "0 8px 24px rgba(0,0,0,0.15)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "scale(1)";
+                e.currentTarget.style.boxShadow = "0 2px 8px rgba(0,0,0,0.1)";
               }}
             >
-              <div>{shed.name}</div>
-              <div className="sale-price" style={{ color: "#e8573a", fontWeight: "bold", marginTop: "4px" }}>
-                {formatPrice(shed.price)}
+              <div
+                className="bg-cover bg-center"
+                style={{
+                  backgroundImage: `url(${shed.image})`,
+                  height: "250px",
+                }}
+              />
+              <div
+                style={{
+                  backgroundColor: "#fff",
+                  color: "#222",
+                  textAlign: "center",
+                  padding: "20px",
+                  fontSize: "16px",
+                  borderTop: "3px solid #00567a",
+                }}
+              >
+                <div style={{ fontWeight: 600 }}>{shed.name}</div>
+                <div style={{ color: "#999", fontSize: "12px", marginTop: "6px" }}>Starting at</div>
+                <div style={{ color: "#e8573a", fontWeight: 800, fontSize: "18px", marginTop: "2px" }}>
+                  {formatPrice(shed.price)}
+                </div>
               </div>
             </div>
           </Link>
@@ -98,20 +126,16 @@ export default function FeaturedCarousel({ sheds }: { sheds: FeaturedShed[] }) {
             key={i}
             onClick={() => setPage(i)}
             aria-label={`Go to page ${i + 1}`}
-            className="cursor-pointer text-sm font-bold transition-colors"
+            className="cursor-pointer transition-colors"
             style={{
-              width: "28px",
-              height: "28px",
+              width: "10px",
+              height: "10px",
               borderRadius: "50%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
               backgroundColor: i === page ? "#00567a" : "#ccc",
-              color: i === page ? "#fff" : "#333",
+              border: "none",
+              padding: 0,
             }}
-          >
-            {i + 1}
-          </button>
+          />
         ))}
       </div>
     </div>
