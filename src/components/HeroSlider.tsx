@@ -52,8 +52,8 @@ export default function HeroSlider() {
   );
 
   return (
-    <section className="home-hero relative w-full overflow-hidden" style={{ height: "auto", maxHeight: "600px" }}>
-      <div className="relative w-full" style={{ aspectRatio: "16/7" }}>
+    <section className="home-hero relative w-full overflow-hidden">
+      <div className="relative w-full" style={{ aspectRatio: "16/6" }}>
         {slide.external ? (
           <a href={slide.href} target="_blank" rel="noopener noreferrer" className="block w-full h-full">
             {inner}

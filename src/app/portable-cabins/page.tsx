@@ -33,7 +33,7 @@ export default function PortableCabinsPage() {
     <div>
       {/* Inner Hero - Page Title Bar */}
       <div className="bg-[#00567a] py-8 text-center">
-        <h1 className="text-white text-4xl font-bold" style={{ fontFamily: "'Tungsten Semibold', sans-serif" }}>About Our Portable Cabins</h1>
+        <h1 className="text-white text-4xl font-bold" style={{ fontFamily: "var(--font-oswald), 'Oswald', sans-serif" }}>About Our Portable Cabins</h1>
       </div>
 
       {/* Hero Image + Quote Form Row */}
@@ -63,7 +63,7 @@ export default function PortableCabinsPage() {
 
       {/* Main Content */}
       <div className="bg-white max-w-7xl mx-auto px-4 py-10">
-        <h1 className="text-center font-bold text-[#00567a] mb-4" style={{ fontFamily: "'Tungsten Semibold', sans-serif", fontSize: '50px' }}>
+        <h1 className="text-center font-bold text-[#00567a] mb-4" style={{ fontFamily: "var(--font-oswald), 'Oswald', sans-serif", fontSize: '40px' }}>
           Dream big in one of our portable cabins&hellip;
         </h1>
         <p className="text-gray-700 leading-relaxed mb-4">

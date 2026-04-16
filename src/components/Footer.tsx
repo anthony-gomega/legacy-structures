@@ -23,8 +23,8 @@ export default function Footer() {
           <div
             style={{
               fontWeight: "bold",
-              fontSize: "50px",
-              fontFamily: '"Tungsten Semibold", sans-serif',
+              fontSize: "40px",
+              fontFamily: 'var(--font-oswald), "Oswald", sans-serif',
               letterSpacing: "1.5px",
             }}
           >
@@ -35,7 +35,7 @@ export default function Footer() {
               href="tel:518-544-2889"
               style={{
                 fontWeight: "bold",
-                fontSize: "50px",
+                fontSize: "40px",
                 color: "#fabe08",
                 textDecoration: "none",
               }}

@@ -1,13 +1,5 @@
 @import "tailwindcss";
 
-@font-face {
-  font-family: "Tungsten Semibold";
-  src: url("https://legacystructuresusa.com/wp-content/themes/barndealer/assets/fonts/Tungsten-Semibold.woff2") format("woff2"),
-       url("https://legacystructuresusa.com/wp-content/themes/barndealer/assets/fonts/Tungsten-Semibold.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
-
 @theme inline {
   --color-header-bg: #ebe9e3;
   --color-nav-red: #b12029;
@@ -30,8 +22,8 @@
   --color-text: #222222;
   --color-text-blue: #194b7d;
   --color-inventory-red: #af0019;
-  --font-heading: "Tungsten Semibold", sans-serif;
-  --font-body: "Roboto", "Helmet", "Freesans", sans-serif;
+  --font-heading: var(--font-oswald), "Oswald", sans-serif;
+  --font-body: var(--font-roboto), "Roboto", "Helmet", "Freesans", sans-serif;
 }
 
 body {
@@ -45,18 +37,19 @@ body {
 h1 {
   text-align: center;
   color: var(--color-heading-blue);
-  font-weight: bold;
-  font-size: 50px;
-  padding: 30px 0 15px;
+  font-weight: 600;
+  font-size: 42px;
+  padding: 25px 0 12px;
   font-family: var(--font-heading);
   letter-spacing: 1.5px;
+  text-transform: uppercase;
 }
 
 h2 {
   color: var(--color-heading-blue);
-  font-weight: bold;
-  font-size: 50px;
-  padding-bottom: 15px;
+  font-weight: 600;
+  font-size: 40px;
+  padding-bottom: 12px;
   font-family: var(--font-heading);
   letter-spacing: 1.5px;
 }

@@ -674,8 +674,8 @@ export default function InventoryPage() {
           style={{
             textAlign: "center",
             color: "#00567a",
-            fontFamily: "'Tungsten Semibold', 'Oswald', sans-serif",
-            fontSize: "50px",
+            fontFamily: "var(--font-oswald), 'Oswald', 'Oswald', sans-serif",
+            fontSize: "40px",
             fontWeight: 600,
             margin: "30px auto 20px",
             padding: "0 20px",

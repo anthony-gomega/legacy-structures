@@ -42,11 +42,11 @@ export default function Header() {
         .nav-toggle button { background: none; border: none; color: #fff; font-size: 28px; cursor: pointer; }
         .nav-list { display: flex; justify-content: space-between; list-style: none; margin: 0; padding: 0; }
         .nav-item { flex-grow: 1; position: relative; }
-        .nav-link { display: block; padding: 15px; color: #fff !important; font-family: 'Tungsten Semibold', sans-serif; font-size: 25px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; text-decoration: none; text-align: center; background: transparent; transition: background-color 0.3s ease; }
+        .nav-link { display: block; padding: 15px; color: #fff !important; font-family: var(--font-oswald), 'Oswald', sans-serif; font-size: 25px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; text-decoration: none; text-align: center; background: transparent; transition: background-color 0.3s ease; }
         .nav-item:hover > .nav-link { background: #fff; color: #b12029 !important; }
         .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.15); z-index: 1000; list-style: none; margin: 0; padding: 0; min-width: 240px; }
         .dropdown-parent:hover > .dropdown-menu { display: block; }
-        .dropdown-link { display: block; padding: 15px; color: #b12029 !important; font-family: 'Tungsten Semibold', sans-serif; font-size: 25px; font-weight: bold; text-transform: uppercase; text-decoration: none; text-align: left; transition: background-color 0.3s ease; letter-spacing: 0.5px; }
+        .dropdown-link { display: block; padding: 15px; color: #b12029 !important; font-family: var(--font-oswald), 'Oswald', sans-serif; font-size: 25px; font-weight: bold; text-transform: uppercase; text-decoration: none; text-align: left; transition: background-color 0.3s ease; letter-spacing: 0.5px; }
         .dropdown-link:hover { background: #b12029; color: #fff !important; }
         @media (max-width: 768px) {
           .hdr-inner { flex-direction: column; }

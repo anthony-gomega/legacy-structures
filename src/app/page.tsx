@@ -60,7 +60,7 @@ export default function Home() {
               style={{
                 color: "#fff",
                 textAlign: "center",
-                fontSize: "50px",
+                fontSize: "40px",
                 paddingBottom: "15px",
               }}
             >
@@ -125,7 +125,7 @@ export default function Home() {
               style={{
                 color: "#fff",
                 textAlign: "center",
-                fontSize: "50px",
+                fontSize: "40px",
                 paddingBottom: "15px",
               }}
             >
@@ -184,7 +184,7 @@ export default function Home() {
             textAlign: "center",
             padding: "30px 0",
             color: "#00567a",
-            fontSize: "50px",
+            fontSize: "40px",
           }}
         >
           Featured Sheds For Sale in Hudson Falls, NY
@@ -201,8 +201,8 @@ export default function Home() {
             href="/inventory"
             style={{
               color: "#fff",
-              fontFamily: '"Tungsten Semibold", sans-serif',
-              fontSize: "50px",
+              fontFamily: 'var(--font-oswald), "Oswald", sans-serif',
+              fontSize: "40px",
               fontWeight: "bold",
               textTransform: "uppercase",
               textDecoration: "none",
@@ -220,7 +220,7 @@ export default function Home() {
           style={{
             textAlign: "center",
             color: "#af1919",
-            fontSize: "50px",
+            fontSize: "40px",
             paddingBottom: "15px",
           }}
         >
@@ -254,7 +254,7 @@ export default function Home() {
             <h2
               style={{
                 color: "#af1919",
-                fontSize: "50px",
+                fontSize: "40px",
                 paddingBottom: "15px",
                 textAlign: "center",
               }}
@@ -294,8 +294,8 @@ export default function Home() {
             rel="noopener noreferrer"
             style={{
               color: "#fff",
-              fontFamily: '"Tungsten Semibold", sans-serif',
-              fontSize: "50px",
+              fontFamily: 'var(--font-oswald), "Oswald", sans-serif',
+              fontSize: "40px",
               fontWeight: "bold",
               textTransform: "uppercase",
               textDecoration: "none",
@@ -314,8 +314,8 @@ export default function Home() {
           style={{
             textAlign: "center",
             color: "#00567a",
-            fontFamily: '"Tungsten Semibold", sans-serif',
-            fontSize: "50px",
+            fontFamily: 'var(--font-oswald), "Oswald", sans-serif',
+            fontSize: "40px",
             fontWeight: "bold",
             padding: "30px 0 15px",
           }}
