@@ -1,0 +1,156 @@
+import type { Metadata } from "next";
+import QuoteForm from "@/components/QuoteForm";
+import ProductSection from "@/components/ProductSection";
+import DisclaimerText from "@/components/DisclaimerText";
+import DesignerCTA from "@/components/DesignerCTA";
+import PricingGuideSection from "@/components/PricingGuideSection";
+
+export const metadata: Metadata = {
+  title: "Storage Sheds | Legacy Structures",
+  description:
+    "Our storage sheds are a great option for adding much-needed storage space around your home.",
+};
+
+const BASE_URL =
+  "https://legacystructuresusa.com/wp-content/themes/barndealer/assets/images";
+
+export default function StorageShedsPage() {
+  return (
+    <div>
+      {/* Inner Hero */}
+      <div className="bg-[#00567a] px-5 pt-5 pb-0 text-center">
+        <img
+          src={`${BASE_URL}/shed-slider-1.png`}
+          alt="Storage Sheds by Legacy Structures"
+          className="inline-block max-w-[49%] px-[10px]"
+        />
+      </div>
+
+      {/* Slider-Form Wrapper */}
+      <div className="flex flex-col lg:flex-row">
+        {/* Left - 3D Designer CTA */}
+        <div className="lg:w-[67%] flex items-center justify-center p-6">
+          <a href="https://orders.barnportal.com/myquote?dealerid=&dir=1&template=1" target="_blank" rel="noopener noreferrer">
+            <img
+              src={`${BASE_URL}/3d-designer-models-cta.png`}
+              alt="3D Designer - Design Your Own Building"
+              className="max-w-full h-auto"
+            />
+          </a>
+        </div>
+        {/* Right - Quote Form */}
+        <div className="lg:w-[33%] p-4">
+          <QuoteForm title="Request Your" titleSpan="FREE Shed Quote!" />
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-4 py-10">
+        <h1 className="text-3xl font-bold text-[#2d5a27] mb-4">
+          We have a large variety of storage sheds&hellip;
+        </h1>
+        <p className="text-gray-700 leading-relaxed mb-4">
+          Our storage sheds are a great option for adding much-needed storage space around your home. Rather than spending money at a local mini-storage facility, why not purchase one of our storage sheds or use our helpful Rent-To-Own option with easy monthly payments? To learn more about our Rent-To-Own sheds <a href="/rent-to-own" className="text-[#00567a] underline">click here</a>.
+        </p>
+        <p className="text-gray-700 leading-relaxed mb-4">
+          Our storage sheds are built using the best quality materials and exacting standards resulting in a quality building that will last for years to come. We offer three basic versions of our storage sheds: Utility Sheds, Metal Utility Sheds, and our Utility Dormer sheds. Each shed has its own unique value:
+        </p>
+        <p className="text-gray-700 leading-relaxed mb-4">
+          Our basic Utility Shed comes with the option to have either T1-11 pressure-treated siding or LP Smart&#8482; Panel siding. You can choose either option at no additional charge. The Metal Shed uses the same construction process but with 29 gauge metal siding instead of wood. The Utility Dormer Shed is also made with T1-11 pressure-treated siding or LP Smart&#8482; Panel siding but it includes a dormer which brings in a significant amount of natural light to the structure.
+        </p>
+        <p className="text-gray-700 leading-relaxed mb-4">
+          Our Utility Shed can be built with 8ft sidewalls, while the Utility Dormer Shed comes with 7ft sidewalls. Our Metal Sheds are built on 6ft sidewalls. Whatever storage needs you have, one of our storage sheds is sure to fit the bill. If you are looking for a storage shed in or around Hudson Falls, NY then give us a call at <a href="tel:518-544-2889" className="text-[#00567a] underline">518-544-2889</a>.
+        </p>
+        <p className="mb-8">
+          <a href="/rent-to-own" className="text-[#00567a] font-bold underline">
+            Download Our FREE Shed Buying Guide - Click Here
+          </a>
+        </p>
+
+        {/* Utility Sheds */}
+        <div className="border-b-[3px] border-[#00465e] pb-10 mb-10">
+          <ProductSection
+            title="ABOUT OUR UTILITY SHEDS"
+            description="Our Utility Sheds are a great partner to our Lofted Barns. These two building styles are the two most popular storage buildings that we offer. The utility shed's distinct difference over the Lofted Barn is the ability to upgrade the side walls up to 8'. This makes this building ideal for a home office, man cave or she shed. 8ft wide versions come with a single barn door while the 10ft wide versions come with double barn doors. The Utility Shed comes in the following sizes:"
+            image={`${BASE_URL}/utility-shed.png`}
+            imageAlt="Utility Shed"
+            sizeGroups={[
+              { label: "8' WIDE", sizes: ["8x8", "8x10", "8x12", "8x16"] },
+              { label: "10' WIDE", sizes: ["10x10", "10x12", "10x14", "10x16", "10x20"] },
+              { label: "12' WIDE", sizes: ["12x16", "12x20", "12x24", "12x32", "12x36", "12x40"] },
+              { label: "14' WIDE", sizes: ["14x24", "14x28", "14x32", "14x36", "14x40"] },
+              { label: "16' WIDE", sizes: ["16x24", "16x28", "16x32", "16x36", "16x40"] },
+            ]}
+          />
+        </div>
+
+        {/* Metal Sheds */}
+        <div className="border-b-[3px] border-[#00465e] pb-10 mb-10">
+          <ProductSection
+            title="ABOUT OUR METAL SHEDS"
+            description="Our Metals Sheds are a great partner to our Metal Lofted Barns. These two building styles are the two most popular storage buildings that we offer. This model offers a great storage solution while not breaking the bank. 36in on-center studs and trusses are standard. Standard sidewall color is Light Stone and standard roof color is Burnished Slate. Other colors are available (at an additional charge.) 8ft wide versions come with a single barn door while the 10ft wide versions come with double barn doors. The Metal Shed comes in the following sizes:"
+            image={`${BASE_URL}/metal-sheds.png`}
+            imageAlt="Metal Shed"
+            sizeGroups={[
+              { label: "8' WIDE", sizes: ["8x12", "8x16"] },
+              { label: "10' WIDE", sizes: ["10x10", "10x12", "10x16", "10x20"] },
+              { label: "12' WIDE", sizes: ["12x16", "12x20", "12x24", "12x28", "12x32"] },
+            ]}
+          />
+        </div>
+
+        {/* Single Slope Sheds */}
+        <div className="border-b-[3px] border-[#00465e] pb-10 mb-10">
+          <ProductSection
+            title="ABOUT OUR SINGLE SLOPE SHEDS"
+            description="The Single Slope Shed boasts a lean-to-roof design that allows it to blend seamlessly into your outdoor surroundings. By positioning the shed with its back against a tree line or property boundary, it can become an organic part of your landscape. The front of the shed is elevated and can feature horizontal windows that allow plenty of natural light to flood the interior. Single Slope Sheds are ENGINEER CERTIFIED for your peace of mind. The Single Slope Shed comes in the following sizes:"
+            image={`${BASE_URL}/single-slope.png`}
+            imageAlt="Single Slope Shed"
+            sizeGroups={[
+              { label: "8' WIDE", sizes: ["8x12", "8x16"] },
+              { label: "10' WIDE", sizes: ["10x10", "10x12", "10x14", "10x16", "10x20"] },
+              { label: "12' WIDE", sizes: ["12x16", "12x20", "12x24", "12x28", "12x32", "12x36", "12x40"] },
+              { label: "14' WIDE", sizes: ["14x24", "14x28", "14x32", "14x36", "14x40"] },
+            ]}
+          />
+        </div>
+
+        {/* Utility Dormer Sheds */}
+        <div className="border-b-[3px] border-[#00465e] pb-10 mb-10">
+          <ProductSection
+            title="ABOUT OUR UTILITY DORMER SHEDS"
+            description="Our Utility Dormer is one of the newest additions to the Backyard Outfitter family of buildings. It is built on our Utility Shed style building and allows tons of extra natural light in. If you are looking for your next craft room or a place for all of your gardening supplies, the Utility Dormer might just be the perfect solution for you. Comes standard with 7/12 pitch roof. Three 10in x 29 horizontal windows. Treated buildings have 81in inside walls. Painted/Urethane buildings have 82.5in interior walls. 8ft wide versions come with a single barn door while the 10ft wide versions come with double barn doors. The Utility Dormer Shed comes in the following sizes:"
+            image={`${BASE_URL}/utility-dormer.png`}
+            imageAlt="Utility Dormer Shed"
+            sizeGroups={[
+              { label: "8' WIDE", sizes: ["8x12", "8x16"] },
+              { label: "10' WIDE", sizes: ["10x10", "10x12", "10x14", "10x16", "10x20"] },
+              { label: "12' WIDE", sizes: ["12x16", "12x20", "12x24", "12x28", "12x32", "12x36", "12x40"] },
+            ]}
+          />
+        </div>
+
+        {/* Gable Dormer Sheds */}
+        <div className="border-b-[3px] border-[#00465e] pb-10 mb-10">
+          <ProductSection
+            title="ABOUT OUR GABLE DORMER SHEDS"
+            description="Our Gable Dormer is one of the newest additions to the Backyard Outfitter family of buildings. It is built on our Utility Shed style building and offers a touch of class on your building. If you are looking for your next craft room or spot to place all of your gardening supplies, the Gable Dormer might just be the perfect solution for you."
+            image={`${BASE_URL}/gable-dormer-product-sizes.png`}
+            imageAlt="Gable Dormer Shed"
+            sizeGroups={[
+              { label: "8' WIDE", sizes: ["8x12", "8x16"] },
+              { label: "10' WIDE", sizes: ["10x12", "10x14", "10x16", "10x20"] },
+              { label: "12' WIDE", sizes: ["12x16", "12x20", "12x24", "12x32", "12x36", "12x40"] },
+              { label: "14' WIDE", sizes: ["14x24", "14x28", "14x32", "14x36", "14x40"] },
+              { label: "16' WIDE", sizes: ["16x24", "16x28", "16x32", "16x36", "16x40"] },
+            ]}
+          />
+        </div>
+
+        <DisclaimerText />
+        <DesignerCTA />
+        <PricingGuideSection />
+      </div>
+    </div>
+  );
+}

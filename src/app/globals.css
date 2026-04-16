@@ -1,26 +1,94 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@font-face {
+  font-family: "Tungsten Semibold";
+  src: url("https://legacystructuresusa.com/wp-content/themes/barndealer/assets/fonts/Tungsten-Semibold.woff2") format("woff2"),
+       url("https://legacystructuresusa.com/wp-content/themes/barndealer/assets/fonts/Tungsten-Semibold.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-header-bg: #ebe9e3;
+  --color-nav-red: #b12029;
+  --color-nav-red-dark: #af1919;
+  --color-heading-blue: #00567a;
+  --color-heading-blue-dark: #004a69;
+  --color-link: #03597c;
+  --color-cta-gold: #ffc800;
+  --color-cta-gold-hover: #ffd168;
+  --color-accent-gold: #fabe08;
+  --color-accent-gold-dark: #e9bb52;
+  --color-red-section: #af1919;
+  --color-letter-red: #c81100;
+  --color-footer-bg: #ebe9e3;
+  --color-teal-cta: #03597c;
+  --color-form-bg: #00567a;
+  --color-form-dark: #1f1e1e;
+  --color-pricing-bg: #eae9e4;
+  --color-featured-bg: #ebe9e3;
+  --color-text: #222222;
+  --color-text-blue: #194b7d;
+  --color-inventory-red: #af0019;
+  --font-heading: "Tungsten Semibold", sans-serif;
+  --font-body: "Roboto", "Helmet", "Freesans", sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
+  font-size: 19px;
+  color: var(--color-text);
+  overflow-x: hidden;
+}
+
+h1 {
+  text-align: center;
+  color: var(--color-heading-blue);
+  font-weight: bold;
+  font-size: 50px;
+  padding: 30px 0 15px;
+  font-family: var(--font-heading);
+  letter-spacing: 1.5px;
+}
+
+h2 {
+  color: var(--color-heading-blue);
+  font-weight: bold;
+  font-size: 50px;
+  padding-bottom: 15px;
+  font-family: var(--font-heading);
+  letter-spacing: 1.5px;
+}
+
+h3 {
+  color: var(--color-heading-blue);
+  font-weight: bold;
+}
+
+p {
+  line-height: 30px;
+  padding-bottom: 20px;
+  font-family: var(--font-body);
+}
+
+p:last-child {
+  padding-bottom: 0;
+}
+
+a {
+  color: var(--color-link);
+}
+
+a:hover {
+  color: var(--color-heading-blue-dark);
+}
+
+select, input, textarea {
+  font-size: 16px;
+}
+
+::selection {
+  background: #fcd700;
+  color: #fff;
+  text-shadow: none;
 }
