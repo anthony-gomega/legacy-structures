@@ -1,8 +1,39 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { buildings } from "@/data/buildings";
+
+const parsePrice = (s: string | undefined): number => {
+  if (!s) return 0;
+  const m = s.replace(/[,\s$+taxa-zA-Z]/g, "");
+  return parseFloat(m) || 0;
+};
+
+// Inventory items built from shared buildings data (excludes demo-only records without real inv numbers)
+const SHARED_INVENTORY: InventoryItem[] = buildings
+  .filter((b) => !b.inventoryNumber.includes("DEMO"))
+  .map((b) => ({
+    model: b.modelType,
+    slug: b.slug,
+    width: b.width,
+    length: b.length,
+    size: b.size,
+    wallsColor: b.wallColor,
+    trimColor: b.trimColor,
+    roofColor: b.roofColor.includes("-") ? b.roofColor : `${b.roofColor.replace(" Metal", "")} - Metal`,
+    inventoryNumber: b.inventoryNumber,
+    cashPrice: parsePrice(b.cashPrice),
+    salePrice: b.salePrice ? parsePrice(b.salePrice) : null,
+    rto36: parsePrice(b.rto36),
+    rto48: parsePrice(b.rto48),
+    buildingType: b.modelType,
+    sidingColor: b.wallColor,
+    condition: "New",
+    image: b.image,
+    designTemplate: String(b.designerTemplate),
+  }));
 
 /* ------------------------------------------------------------------ */
 /*  Data                                                               */
@@ -29,197 +60,7 @@ interface InventoryItem {
   designTemplate: string;
 }
 
-const inventoryItems: InventoryItem[] = [
-  {
-    model: "Chicken Coop",
-    slug: "chicken-coop",
-    width: 8,
-    length: 8,
-    size: "8 x 8",
-    wallsColor: "Navajo",
-    trimColor: "Black",
-    roofColor: "Black - Metal",
-    inventoryNumber: "PCC-72288-86-121824-C",
-    cashPrice: 3120.0,
-    salePrice: 2964.0,
-    rto36: 137.22,
-    rto48: 123.5,
-    buildingType: "Chicken Coop",
-    sidingColor: "Navajo",
-    condition: "New",
-    image:
-      "https://legacystructuresusa.com/wp-content/uploads/2025/07/IMG_0156-1753236054332-scaled.jpeg",
-    designTemplate: "25",
-  },
-  {
-    model: "Mini Barn",
-    slug: "mini-barn",
-    width: 10,
-    length: 12,
-    size: "10 x 12",
-    wallsColor: "Red",
-    trimColor: "Barn White",
-    roofColor: "Black - Metal",
-    inventoryNumber: "PBN-73051-1012-080825-C",
-    cashPrice: 3445.0,
-    salePrice: null,
-    rto36: 159.49,
-    rto48: 143.54,
-    buildingType: "Mini Barn",
-    sidingColor: "Red",
-    condition: "New",
-    image:
-      "https://legacystructuresusa.com/wp-content/uploads/2025/10/IMG_0353-1760801572551-scaled.jpeg",
-    designTemplate: "22",
-  },
-  {
-    model: "Utility Shed",
-    slug: "utility-shed-3",
-    width: 10,
-    length: 12,
-    size: "10 x 12",
-    wallsColor: "Clay",
-    trimColor: "Black",
-    roofColor: "Black - Metal",
-    inventoryNumber: "YUT-C10181-1012-011226-SP",
-    cashPrice: 3775.0,
-    salePrice: null,
-    rto36: 174.77,
-    rto48: 157.29,
-    buildingType: "Utility Shed",
-    sidingColor: "Clay",
-    condition: "New",
-    image:
-      "https://legacystructuresusa.com/wp-content/uploads/2026/03/IMG_3336-1773796375925-scaled.jpeg",
-    designTemplate: "25",
-  },
-  {
-    model: "Utility Shed",
-    slug: "utility-shed-2",
-    width: 10,
-    length: 12,
-    size: "10 x 12",
-    wallsColor: "Red",
-    trimColor: "Barn White",
-    roofColor: "Black - Metal",
-    inventoryNumber: "YUT-c10185-1012-010926-SP",
-    cashPrice: 3845.0,
-    salePrice: null,
-    rto36: 178.01,
-    rto48: 160.21,
-    buildingType: "Utility Shed",
-    sidingColor: "Red",
-    condition: "New",
-    image:
-      "https://legacystructuresusa.com/wp-content/uploads/2026/03/IMG_3330-1773795752495-scaled.jpeg",
-    designTemplate: "25",
-  },
-  {
-    model: "Lofted Barn",
-    slug: "lofted-barn-8",
-    width: 8,
-    length: 12,
-    size: "8 x 12",
-    wallsColor: "Urethane Chestnut",
-    trimColor: "Black",
-    roofColor: "Black - Metal",
-    inventoryNumber: "WLB-72180-812-110824-C",
-    cashPrice: 4231.0,
-    salePrice: 4019.45,
-    rto36: 186.09,
-    rto48: 167.48,
-    buildingType: "Lofted Barn",
-    sidingColor: "Urethane Chestnut",
-    condition: "New",
-    image:
-      "https://legacystructuresusa.com/wp-content/uploads/2025/07/IMG_0201-1753236247376-scaled.jpeg",
-    designTemplate: "23",
-  },
-  {
-    model: "Single Slope",
-    slug: "single-slope",
-    width: 10,
-    length: 12,
-    size: "10 x 12",
-    wallsColor: "Urethane Driftwood",
-    trimColor: "Black",
-    roofColor: "Black - Metal",
-    inventoryNumber: "WSS-70467-1012-072623-C",
-    cashPrice: 4635.0,
-    salePrice: 4403.0,
-    rto36: 203.84,
-    rto48: 183.46,
-    buildingType: "Single Slope",
-    sidingColor: "Urethane Driftwood",
-    condition: "Used",
-    image:
-      "https://legacystructuresusa.com/wp-content/uploads/2025/03/IMG_8877-1741119643511-scaled.jpeg",
-    designTemplate: "3",
-  },
-  {
-    model: "Lofted Barn",
-    slug: "lofted-barn-11",
-    width: 10,
-    length: 14,
-    size: "10 x 14",
-    wallsColor: "Urethane Driftwood",
-    trimColor: "Navajo",
-    roofColor: "Black - Metal",
-    inventoryNumber: "WLB-72669-1012-042825-C",
-    cashPrice: 4495.0,
-    salePrice: null,
-    rto36: 208.1,
-    rto48: 187.29,
-    buildingType: "Lofted Barn",
-    sidingColor: "Urethane Driftwood",
-    condition: "New",
-    image:
-      "https://legacystructuresusa.com/wp-content/uploads/2025/10/IMG_0359-1760801846846-scaled.jpeg",
-    designTemplate: "23",
-  },
-  {
-    model: "Utility Shed",
-    slug: "utility-shed-8",
-    width: 8,
-    length: 16,
-    size: "8 x 16",
-    wallsColor: "Urethane Driftwood",
-    trimColor: "Black",
-    roofColor: "Black - Metal",
-    inventoryNumber: "WSUT-72175-816-110824-C",
-    cashPrice: 4585.0,
-    salePrice: null,
-    rto36: 212.27,
-    rto48: 191.04,
-    buildingType: "Utility Shed",
-    sidingColor: "Urethane Driftwood",
-    condition: "New",
-    image:
-      "https://legacystructuresusa.com/wp-content/uploads/2025/03/IMG_9653-1741118822925-scaled.jpeg",
-    designTemplate: "25",
-  },
-  {
-    model: "Lofted Barn",
-    slug: "lofted-barn-6",
-    width: 10,
-    length: 14,
-    size: "10 x 14",
-    wallsColor: "Evergreen",
-    trimColor: "Evergreen",
-    roofColor: "Black - Metal",
-    inventoryNumber: "PLB-86736-1014-050925-H",
-    cashPrice: 4950.0,
-    salePrice: null,
-    rto36: 229.17,
-    rto48: 206.25,
-    buildingType: "Lofted Barn",
-    sidingColor: "Evergreen",
-    condition: "New",
-    image:
-      "https://legacystructuresusa.com/wp-content/uploads/2025/07/IMG_0123-1753211311664-scaled.jpeg",
-    designTemplate: "23",
-  },
-];
+const inventoryItems: InventoryItem[] = SHARED_INVENTORY;
 
 /* ------------------------------------------------------------------ */
 /*  Filter options                                                     */
@@ -636,6 +477,8 @@ export default function InventoryPage() {
   const [filterCondition, setFilterCondition] = useState<string>("");
   const [sortBy, setSortBy] = useState<string>("ASC");
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 9;
 
   const filtered = useMemo(() => {
     let result = [...inventoryItems];
@@ -655,6 +498,17 @@ export default function InventoryPage() {
 
     return result;
   }, [filterWidth, filterLength, filterType, filterColor, filterCondition, sortBy]);
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [filterWidth, filterLength, filterType, filterColor, filterCondition, sortBy]);
+
+  const totalPages = Math.max(1, Math.ceil(filtered.length / ITEMS_PER_PAGE));
+  const pagedItems = useMemo(() => {
+    const start = (currentPage - 1) * ITEMS_PER_PAGE;
+    return filtered.slice(start, start + ITEMS_PER_PAGE);
+  }, [filtered, currentPage]);
 
   function clearFilters() {
     setFilterWidth(null);
@@ -961,11 +815,11 @@ export default function InventoryPage() {
           </div>
         ) : (
           <>
-            {filtered.map((item, index) => (
+            {pagedItems.map((item, index) => (
               <div key={item.inventoryNumber}>
                 <InventoryItemRow item={item} />
                 {/* Red CTA bar after every 5 items */}
-                {(index + 1) % 5 === 0 && index < filtered.length - 1 && (
+                {(index + 1) % 5 === 0 && index < pagedItems.length - 1 && (
                   <PricingGuideCTA />
                 )}
               </div>
@@ -974,73 +828,69 @@ export default function InventoryPage() {
         )}
 
         {/* Pagination */}
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: "8px",
-            padding: "40px 20px",
-            fontFamily: "Roboto, sans-serif",
-            fontSize: "16px",
-          }}
-        >
-          <span
+        {totalPages > 1 && (
+          <div
             style={{
-              padding: "8px 14px",
-              background: "#00567a",
-              color: "#fff",
-              borderRadius: "3px",
-              fontWeight: "bold",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "8px",
+              padding: "40px 20px",
+              fontFamily: "var(--font-inter), Inter, sans-serif",
+              fontSize: "15px",
             }}
           >
-            1
-          </span>
-          <a
-            href="#"
-            style={{
-              padding: "8px 14px",
-              color: "#00567a",
-              textDecoration: "none",
-              borderRadius: "3px",
-            }}
-          >
-            2
-          </a>
-          <a
-            href="#"
-            style={{
-              padding: "8px 14px",
-              color: "#00567a",
-              textDecoration: "none",
-              borderRadius: "3px",
-            }}
-          >
-            3
-          </a>
-          <a
-            href="#"
-            style={{
-              padding: "8px 14px",
-              color: "#00567a",
-              textDecoration: "none",
-              borderRadius: "3px",
-            }}
-          >
-            4
-          </a>
-          <a
-            href="#"
-            style={{
-              padding: "8px 14px",
-              color: "#00567a",
-              textDecoration: "none",
-              borderRadius: "3px",
-            }}
-          >
-            Next &gt;
-          </a>
-        </div>
+            {currentPage > 1 && (
+              <button
+                onClick={() => { setCurrentPage(currentPage - 1); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                style={{
+                  padding: "8px 14px",
+                  color: "#1a3a5c",
+                  background: "transparent",
+                  border: "none",
+                  cursor: "pointer",
+                }}
+              >
+                &lt; Previous
+              </button>
+            )}
+            {Array.from({ length: totalPages }).map((_, i) => {
+              const page = i + 1;
+              const active = page === currentPage;
+              return (
+                <button
+                  key={page}
+                  onClick={() => { setCurrentPage(page); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                  style={{
+                    padding: "8px 14px",
+                    background: active ? "#1a3a5c" : "transparent",
+                    color: active ? "#fff" : "#1a3a5c",
+                    borderRadius: "4px",
+                    fontWeight: active ? 700 : 500,
+                    border: "none",
+                    cursor: "pointer",
+                  }}
+                >
+                  {page}
+                </button>
+              );
+            })}
+            {currentPage < totalPages && (
+              <button
+                onClick={() => { setCurrentPage(currentPage + 1); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                style={{
+                  padding: "8px 14px",
+                  color: "#1a3a5c",
+                  background: "transparent",
+                  border: "none",
+                  cursor: "pointer",
+                }}
+              >
+                Next &gt;
+              </button>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
