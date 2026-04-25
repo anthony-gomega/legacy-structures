@@ -60,7 +60,8 @@ export default function Header() {
         .header-top {
           background: #fff;
           max-width: 100%;
-          padding: 12px 24px;
+          padding: 8px 24px;
+          border-bottom: 1px solid #e8e4df;
         }
         .header-top-inner {
           max-width: 1200px;
@@ -68,20 +69,56 @@ export default function Header() {
           display: flex;
           align-items: center;
           justify-content: space-between;
+          gap: 16px;
         }
-        .header-phone {
+        .header-cta-group {
           display: flex;
           align-items: center;
+          gap: 10px;
+        }
+        .header-quote-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          background: #d4a017;
+          color: #fff !important;
+          font-weight: 700;
+          font-size: 13px;
+          font-family: var(--font-poppins), Poppins, sans-serif;
+          padding: 10px 18px;
+          border-radius: 6px;
+          text-decoration: none;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          transition: all 0.2s ease;
+          white-space: nowrap;
+        }
+        .header-quote-btn:hover {
+          background: #b8881a;
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(212,160,23,0.4);
+        }
+        .header-phone {
+          display: inline-flex;
+          align-items: center;
           gap: 8px;
-          color: #1a3a5c;
+          background: #c0392b;
+          color: #fff !important;
           text-decoration: none;
           font-weight: 700;
-          font-size: 20px;
+          font-size: 14px;
           font-family: var(--font-poppins), Poppins, sans-serif;
-          transition: color 0.2s;
+          padding: 10px 18px;
+          border-radius: 6px;
+          letter-spacing: 0.5px;
+          transition: all 0.2s ease;
+          white-space: nowrap;
         }
-        .header-phone:hover { color: #c0392b; }
-        .header-phone svg { color: #c0392b; }
+        .header-phone:hover {
+          background: #a52f23;
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(192,57,43,0.45);
+        }
 
         .nav-wrap-outer {
           background: #1a3a5c;
@@ -134,8 +171,11 @@ export default function Header() {
         .dropdown-link:hover { background: #f7f5f2; color: #c0392b !important; padding-left: 26px; }
 
         @media (max-width: 768px) {
-          .header-top { flex-direction: column; gap: 8px; padding: 10px 16px; }
-          .header-phone { font-size: 17px; }
+          .header-top { padding: 8px 12px; }
+          .header-top-inner { flex-direction: row; gap: 8px; flex-wrap: wrap; justify-content: center; }
+          .header-cta-group { gap: 6px; }
+          .header-quote-btn { font-size: 12px; padding: 8px 12px; }
+          .header-phone { font-size: 12px; padding: 8px 12px; }
           .nav-toggle { display: block; text-align: right; }
           .nav-list { display: none; flex-direction: column; background: #1a3a5c; }
           .nav-list.open { display: flex !important; }
@@ -157,14 +197,20 @@ export default function Header() {
                 alt="Legacy Structures"
                 width={280}
                 height={90}
-                style={{ maxHeight: "70px", width: "auto", height: "auto" }}
+                style={{ maxHeight: "56px", width: "auto", height: "auto" }}
                 priority
               />
             </Link>
-            <a href="tel:518-544-2889" className="header-phone">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-              518-544-2889
-            </a>
+            <div className="header-cta-group">
+              <Link href="/inventory" className="header-quote-btn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                Get a Quote
+              </Link>
+              <a href="tel:518-544-2889" className="header-phone">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                518-544-2889
+              </a>
+            </div>
           </div>
         </div>
 

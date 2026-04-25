@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
@@ -20,188 +20,187 @@ function formatPrice(price: number) {
 }
 
 export default function FeaturedCarousel({ sheds }: { sheds: FeaturedShed[] }) {
-  const itemsPerPage = 3;
-  const totalPages = Math.ceil(sheds.length / itemsPerPage);
-  const [page, setPage] = useState(0);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
 
-  const prev = useCallback(() => {
-    setPage((p) => (p === 0 ? totalPages - 1 : p - 1));
-  }, [totalPages]);
-
-  const next = useCallback(() => {
-    setPage((p) => (p === totalPages - 1 ? 0 : p + 1));
-  }, [totalPages]);
+  const updateScrollState = useCallback(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    setCanScrollLeft(el.scrollLeft > 8);
+    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 8);
+  }, []);
 
   useEffect(() => {
-    const timer = setInterval(next, 5000);
-    return () => clearInterval(timer);
-  }, [next]);
+    updateScrollState();
+    const el = scrollRef.current;
+    if (!el) return;
+    el.addEventListener("scroll", updateScrollState, { passive: true });
+    window.addEventListener("resize", updateScrollState);
+    return () => {
+      el.removeEventListener("scroll", updateScrollState);
+      window.removeEventListener("resize", updateScrollState);
+    };
+  }, [updateScrollState]);
 
-  const startIdx = page * itemsPerPage;
-  const visible = sheds.slice(startIdx, startIdx + itemsPerPage);
-
-  const arrowStyle: React.CSSProperties = {
-    backgroundColor: "rgba(255,255,255,0.2)",
-    backdropFilter: "blur(4px)",
-    WebkitBackdropFilter: "blur(4px)",
+  const scrollByCard = (direction: "left" | "right") => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const card = el.querySelector("[data-card]") as HTMLElement | null;
+    const cardWidth = card ? card.offsetWidth + 24 : 320;
+    el.scrollBy({ left: direction === "right" ? cardWidth : -cardWidth, behavior: "smooth" });
   };
 
   return (
-    <div className="relative">
+    <div style={{ position: "relative", padding: "0 56px" }}>
       {/* Prev Arrow */}
       <button
-        onClick={prev}
-        aria-label="Previous featured sheds"
-        className="absolute -left-5 top-1/2 -translate-y-1/2 z-10 text-white w-10 h-10 flex items-center justify-center rounded-full transition-all cursor-pointer"
-        style={arrowStyle}
+        onClick={() => scrollByCard("left")}
+        aria-label="Previous"
+        disabled={!canScrollLeft}
+        style={{
+          position: "absolute",
+          left: 0,
+          top: "50%",
+          transform: "translateY(-50%)",
+          zIndex: 10,
+          background: canScrollLeft ? "#1a3a5c" : "rgba(26,58,92,0.3)",
+          color: "#fff",
+          border: "none",
+          width: 48,
+          height: 48,
+          borderRadius: "50%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          cursor: canScrollLeft ? "pointer" : "not-allowed",
+          boxShadow: "0 4px 16px rgba(0,0,0,0.2)",
+          transition: "all 0.2s ease",
+        }}
       >
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
           <polyline points="15 18 9 12 15 6" />
         </svg>
       </button>
 
       {/* Next Arrow */}
       <button
-        onClick={next}
-        aria-label="Next featured sheds"
-        className="absolute -right-5 top-1/2 -translate-y-1/2 z-10 text-white w-10 h-10 flex items-center justify-center rounded-full transition-all cursor-pointer"
-        style={arrowStyle}
+        onClick={() => scrollByCard("right")}
+        aria-label="Next"
+        disabled={!canScrollRight}
+        style={{
+          position: "absolute",
+          right: 0,
+          top: "50%",
+          transform: "translateY(-50%)",
+          zIndex: 10,
+          background: canScrollRight ? "#1a3a5c" : "rgba(26,58,92,0.3)",
+          color: "#fff",
+          border: "none",
+          width: 48,
+          height: 48,
+          borderRadius: "50%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          cursor: canScrollRight ? "pointer" : "not-allowed",
+          boxShadow: "0 4px 16px rgba(0,0,0,0.2)",
+          transition: "all 0.2s ease",
+        }}
       >
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
           <polyline points="9 6 15 12 9 18" />
         </svg>
       </button>
 
-      {/* Items */}
-      <div className="grid grid-cols-3 gap-4">
-        {visible.map((shed, i) => (
+      {/* Scrollable track */}
+      <div
+        ref={scrollRef}
+        style={{
+          display: "flex",
+          gap: 24,
+          overflowX: "auto",
+          overflowY: "hidden",
+          scrollSnapType: "x mandatory",
+          scrollBehavior: "smooth",
+          scrollbarWidth: "none",
+          msOverflowStyle: "none",
+          paddingBottom: 8,
+        }}
+        className="featured-carousel-track"
+      >
+        <style>{`
+          .featured-carousel-track::-webkit-scrollbar { display: none; }
+        `}</style>
+
+        {sheds.map((shed) => (
           <motion.div
-            key={`${shed.href}-${startIdx + i}`}
+            key={shed.href}
+            data-card
             initial="rest"
             whileHover="hover"
             animate="rest"
             variants={{
-              rest: { scale: 1, y: 0, boxShadow: "0 2px 8px rgba(0,0,0,0.1)" },
-              hover: {
-                scale: 1.02,
-                y: -4,
-                boxShadow: "0 12px 32px rgba(0,0,0,0.2)",
-              },
+              rest: { y: 0, boxShadow: "0 2px 8px rgba(0,0,0,0.08)" },
+              hover: { y: -6, boxShadow: "0 16px 36px rgba(0,0,0,0.18)" },
             }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            style={{ borderRadius: "8px" }}
+            transition={{ type: "spring", stiffness: 300, damping: 22 }}
+            style={{
+              flex: "0 0 calc(33.333% - 16px)",
+              minWidth: 280,
+              borderRadius: 12,
+              background: "#fff",
+              scrollSnapAlign: "start",
+              overflow: "hidden",
+            }}
           >
-            <Link href={shed.href} className="block group">
-              <div
-                style={{
-                  borderRadius: "8px",
-                  overflow: "hidden",
-                }}
-              >
-                {/* Image container with zoom-on-hover */}
-                <div
-                  style={{
-                    position: "relative",
-                    height: "280px",
-                    overflow: "hidden",
-                  }}
-                >
-                  <motion.div
-                    className="bg-cover bg-center"
-                    style={{
-                      backgroundImage: `url(${shed.image})`,
-                      width: "100%",
-                      height: "100%",
-                    }}
-                    variants={{
-                      rest: { scale: 1 },
-                      hover: { scale: 1.05 },
-                    }}
-                    transition={{ duration: 0.4, ease: "easeOut" }}
-                  />
-                  {/* Hover overlay */}
-                  <motion.div
-                    variants={{
-                      rest: { opacity: 0 },
-                      hover: { opacity: 1 },
-                    }}
-                    transition={{ duration: 0.25 }}
-                    style={{
-                      position: "absolute",
-                      inset: 0,
-                      background:
-                        "linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 55%)",
-                      display: "flex",
-                      alignItems: "flex-end",
-                      justifyContent: "center",
-                      padding: "16px",
-                      pointerEvents: "none",
-                    }}
-                  >
-                    <span
-                      style={{
-                        color: "#fff",
-                        fontWeight: 600,
-                        fontSize: "15px",
-                        letterSpacing: "0.3px",
-                      }}
-                    >
-                      View Details →
-                    </span>
-                  </motion.div>
-                </div>
+            <Link href={shed.href} style={{ display: "block", textDecoration: "none", color: "inherit" }}>
+              {/* Image */}
+              <div style={{ position: "relative", height: 240, overflow: "hidden" }}>
                 <motion.div
+                  variants={{ rest: { scale: 1 }, hover: { scale: 1.06 } }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
                   style={{
-                    backgroundColor: "#fff",
-                    color: "#222",
-                    textAlign: "center",
-                    padding: "20px",
-                    fontSize: "16px",
-                    borderTop: "3px solid #00567a",
+                    backgroundImage: `url(${shed.image})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    width: "100%",
+                    height: "100%",
+                  }}
+                />
+                <motion.div
+                  variants={{ rest: { opacity: 0 }, hover: { opacity: 1 } }}
+                  transition={{ duration: 0.25 }}
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    background: "linear-gradient(to top, rgba(15,36,64,0.85) 0%, rgba(0,0,0,0) 60%)",
+                    display: "flex",
+                    alignItems: "flex-end",
+                    padding: 18,
+                    pointerEvents: "none",
                   }}
                 >
-                  <div style={{ fontWeight: 600 }}>{shed.name}</div>
-                  <div style={{ color: "#999", fontSize: "12px", marginTop: "6px" }}>Starting at</div>
-                  <motion.div
-                    variants={{
-                      rest: { scale: 1 },
-                      hover: { scale: 1.08 },
-                    }}
-                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                    style={{
-                      color: "#e8573a",
-                      fontWeight: 800,
-                      fontSize: "18px",
-                      marginTop: "2px",
-                      transformOrigin: "center",
-                    }}
-                  >
-                    {formatPrice(shed.price)}
-                  </motion.div>
+                  <span style={{ color: "#fff", fontWeight: 600, fontSize: 14, letterSpacing: 0.5, fontFamily: "var(--font-poppins)" }}>
+                    View Details →
+                  </span>
                 </motion.div>
+              </div>
+
+              {/* Info */}
+              <div style={{ padding: 20, borderTop: "3px solid #1a3a5c" }}>
+                <div style={{ fontWeight: 700, fontSize: 17, color: "#1a3a5c", fontFamily: "var(--font-poppins)" }}>
+                  {shed.name}
+                </div>
+                <div style={{ color: "#8899aa", fontSize: 12, marginTop: 6, textTransform: "uppercase", letterSpacing: 1 }}>
+                  Starting at
+                </div>
+                <div style={{ color: "#c0392b", fontWeight: 800, fontSize: 22, marginTop: 2, fontFamily: "var(--font-poppins)" }}>
+                  {formatPrice(shed.price)}
+                </div>
               </div>
             </Link>
           </motion.div>
-        ))}
-      </div>
-
-      {/* Dots */}
-      <div className="flex justify-center gap-2 mt-5">
-        {Array.from({ length: totalPages }).map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setPage(i)}
-            aria-label={`Go to page ${i + 1}`}
-            className="cursor-pointer transition-colors"
-            style={{
-              width: "10px",
-              height: "10px",
-              borderRadius: "50%",
-              backgroundColor: i === page ? "#00567a" : "#ccc",
-              border: "none",
-              padding: 0,
-            }}
-          />
         ))}
       </div>
     </div>
