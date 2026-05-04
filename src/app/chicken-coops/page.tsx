@@ -8,9 +8,9 @@ import PageHero from "@/components/PageHero";
 import FadeIn from "@/components/FadeIn";
 
 export const metadata: Metadata = {
-  title: "Chicken Coops",
+  title: "Chicken Coops for Sale | Hudson Falls, NY | Legacy Structures",
   description:
-    "Looking for a safe, practical, and affordable way to raise chickens? Our Chicken Coops at Legacy Structures are designed to make backyard chicken keeping easy and enjoyable.",
+    "Safe, practical, and affordable chicken coops for backyard poultry keeping. Delivered fully assembled to Hudson Falls, NY and surrounding areas. Multiple sizes available.",
 };
 
 const BASE_URL =

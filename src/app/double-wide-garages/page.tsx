@@ -8,9 +8,9 @@ import PageHero from "@/components/PageHero";
 import FadeIn from "@/components/FadeIn";
 
 export const metadata: Metadata = {
-  title: "Double Wide Garages",
+  title: "Double Wide Garages | Hudson Falls, NY | Legacy Structures",
   description:
-    "Double Wide Garages by Legacy Structures — delivered in two halves and joined on-site for serious vehicle, workshop, and equipment storage.",
+    "Double wide garages delivered in two halves and joined on-site — ideal for serious vehicle storage, workshops, and equipment. Serving Hudson Falls, NY and surrounding areas.",
 };
 
 const BASE_URL =

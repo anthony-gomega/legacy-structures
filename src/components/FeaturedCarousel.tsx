@@ -18,17 +18,26 @@ function formatPrice(price: number) {
   });
 }
 
+const CARD_GAP = 24;
+
 export default function FeaturedCarousel({ sheds }: { sheds: FeaturedShed[] }) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+  const [activeIdx, setActiveIdx] = useState(0);
 
   const updateScrollState = useCallback(() => {
     const el = scrollRef.current;
     if (!el) return;
     setCanScrollLeft(el.scrollLeft > 8);
     setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 8);
-  }, []);
+    const card = el.querySelector("[data-card]") as HTMLElement | null;
+    if (card) {
+      const cardWidth = card.offsetWidth + CARD_GAP;
+      const idx = Math.round(el.scrollLeft / cardWidth);
+      setActiveIdx(Math.min(Math.max(0, idx), sheds.length - 1));
+    }
+  }, [sheds.length]);
 
   useEffect(() => {
     updateScrollState();
@@ -46,152 +55,247 @@ export default function FeaturedCarousel({ sheds }: { sheds: FeaturedShed[] }) {
     const el = scrollRef.current;
     if (!el) return;
     const card = el.querySelector("[data-card]") as HTMLElement | null;
-    const cardWidth = card ? card.offsetWidth + 24 : 320;
+    const cardWidth = card ? card.offsetWidth + CARD_GAP : 320;
     el.scrollBy({ left: direction === "right" ? cardWidth : -cardWidth, behavior: "smooth" });
   };
 
+  const goToCard = (idx: number) => {
+    const el = scrollRef.current;
+    const card = el?.querySelector("[data-card]") as HTMLElement | null;
+    if (!el || !card) return;
+    el.scrollTo({ left: idx * (card.offsetWidth + CARD_GAP), behavior: "smooth" });
+  };
+
   return (
-    <div style={{ position: "relative", padding: "0 50px 28px" }}>
-      {/* Prev Arrow */}
-      <button
-        onClick={() => scrollByCard("left")}
-        aria-label="Previous"
-        disabled={!canScrollLeft}
-        style={{
-          position: "absolute",
-          left: 0,
-          top: "50%",
-          transform: "translateY(-50%)",
-          zIndex: 10,
-          background: "transparent",
-          color: canScrollLeft ? "#777" : "rgba(119,119,119,0.35)",
-          border: "none",
-          width: 54,
-          height: 70,
-          borderRadius: 0,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          cursor: canScrollLeft ? "pointer" : "not-allowed",
-          transition: "color 0.2s ease",
-        }}
-      >
-        <svg width="54" height="54" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
-          <polyline points="15 18 9 12 15 6" />
-        </svg>
-      </button>
+    <>
+      <style>{`
+        .carousel-track::-webkit-scrollbar { display: none; }
 
-      {/* Next Arrow */}
-      <button
-        onClick={() => scrollByCard("right")}
-        aria-label="Next"
-        disabled={!canScrollRight}
-        style={{
-          position: "absolute",
-          right: 0,
-          top: "50%",
-          transform: "translateY(-50%)",
-          zIndex: 10,
-          background: "transparent",
-          color: canScrollRight ? "#777" : "rgba(119,119,119,0.35)",
-          border: "none",
-          width: 54,
-          height: 70,
-          borderRadius: 0,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          cursor: canScrollRight ? "pointer" : "not-allowed",
-          transition: "color 0.2s ease",
-        }}
-      >
-        <svg width="54" height="54" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
-          <polyline points="9 6 15 12 9 18" />
-        </svg>
-      </button>
+        .carousel-card-wrap {
+          flex: 0 0 calc(33.333% - 16px);
+          min-width: 270px;
+          scroll-snap-align: start;
+          border-radius: 6px;
+          overflow: hidden;
+          background: transparent;
+          transition: transform 0.35s ease, box-shadow 0.35s ease;
+          will-change: transform;
+        }
+        .carousel-card-wrap:hover {
+          transform: translateY(-6px);
+          box-shadow: 0 16px 44px rgba(0,0,0,0.18);
+        }
 
-      {/* Scrollable track */}
-      <div
-        ref={scrollRef}
-        style={{
-          display: "flex",
-          gap: 34,
-          overflowX: "auto",
-          overflowY: "hidden",
-          scrollSnapType: "x mandatory",
-          scrollBehavior: "smooth",
-          scrollbarWidth: "none",
-          msOverflowStyle: "none",
-          paddingBottom: 8,
-        }}
-        className="featured-carousel-track"
-      >
-        <style>{`
-          .featured-carousel-track::-webkit-scrollbar { display: none; }
-        `}</style>
+        .carousel-card-link {
+          display: block;
+          text-decoration: none;
+          color: inherit;
+        }
 
-        {sheds.map((shed) => (
-          <div
-            key={shed.href}
-            data-card
-            style={{
-              flex: "0 0 calc(33.333% - 23px)",
-              minWidth: 280,
-              background: "transparent",
-              scrollSnapAlign: "start",
-              overflow: "hidden",
-            }}
-          >
-            <Link href={shed.href} style={{ display: "block", textDecoration: "none", color: "inherit" }}>
-              {/* Image */}
-              <div style={{ position: "relative", height: 245, overflow: "hidden", background: "#fff" }}>
-                <div
-                  style={{
-                    backgroundImage: `url(${shed.image})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    width: "100%",
-                    height: "100%",
-                  }}
-                />
-              </div>
+        .carousel-img-wrapper {
+          position: relative;
+          height: 240px;
+          overflow: hidden;
+          background: #f5f3f0;
+        }
 
-              {/* Info */}
-              <div style={{ padding: "15px 12px 17px", background: "#006580", textAlign: "center" }}>
-                <div style={{ fontWeight: 700, fontSize: 16, color: "#fff", fontFamily: "Arial, sans-serif", lineHeight: 1.08 }}>
-                  {shed.name}
+        .carousel-img {
+          background-size: cover;
+          background-position: center;
+          width: 100%;
+          height: 100%;
+          transition: transform 0.55s ease;
+        }
+        .carousel-card-wrap:hover .carousel-img {
+          transform: scale(1.08);
+        }
+
+        .carousel-overlay {
+          position: absolute;
+          inset: 0;
+          background: rgba(0,0,0,0);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: background 0.35s ease;
+        }
+        .carousel-card-wrap:hover .carousel-overlay {
+          background: rgba(0,0,0,0.2);
+        }
+
+        .carousel-view-tag {
+          background: #fff;
+          color: #006580;
+          font-weight: 700;
+          font-size: 12px;
+          text-transform: uppercase;
+          letter-spacing: 0.8px;
+          padding: 7px 18px;
+          border-radius: 3px;
+          opacity: 0;
+          transform: translateY(10px);
+          transition: opacity 0.3s ease, transform 0.3s ease;
+          font-family: Arial, Helvetica, sans-serif;
+          white-space: nowrap;
+        }
+        .carousel-card-wrap:hover .carousel-view-tag {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        .carousel-info {
+          padding: 14px 14px 16px;
+          background: #006580;
+          text-align: center;
+        }
+        .carousel-info-name {
+          font-weight: 700;
+          font-size: 15px;
+          color: #fff;
+          font-family: Arial, Helvetica, sans-serif;
+          line-height: 1.2;
+          margin-bottom: 3px;
+        }
+        .carousel-info-price {
+          font-weight: 700;
+          font-size: 15px;
+          color: rgba(255,255,255,0.88);
+          font-family: Arial, Helvetica, sans-serif;
+          line-height: 1.2;
+        }
+
+        .carousel-arrow-btn {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          z-index: 10;
+          background: transparent;
+          border: none;
+          width: 50px;
+          height: 70px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          padding: 0;
+          transition: color 0.2s ease;
+        }
+
+        .carousel-dot {
+          border: none;
+          cursor: pointer;
+          padding: 0;
+          height: 9px;
+          border-radius: 5px;
+          transition: width 0.32s ease, background 0.32s ease;
+        }
+      `}</style>
+
+      <div style={{ position: "relative", padding: "0 50px 40px" }}>
+        {/* Prev */}
+        <button
+          type="button"
+          onClick={() => scrollByCard("left")}
+          aria-label="Previous featured shed"
+          disabled={!canScrollLeft}
+          className="carousel-arrow-btn"
+          style={{
+            left: 0,
+            color: canScrollLeft ? "#888" : "rgba(136,136,136,0.28)",
+          }}
+        >
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
+        </button>
+
+        {/* Next */}
+        <button
+          type="button"
+          onClick={() => scrollByCard("right")}
+          aria-label="Next featured shed"
+          disabled={!canScrollRight}
+          className="carousel-arrow-btn"
+          style={{
+            right: 0,
+            color: canScrollRight ? "#888" : "rgba(136,136,136,0.28)",
+          }}
+        >
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="9 6 15 12 9 18" />
+          </svg>
+        </button>
+
+        {/* Track */}
+        <div
+          ref={scrollRef}
+          className="carousel-track"
+          style={{
+            display: "flex",
+            gap: CARD_GAP,
+            overflowX: "auto",
+            overflowY: "hidden",
+            scrollSnapType: "x mandatory",
+            scrollBehavior: "smooth",
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+            paddingBottom: 6,
+          }}
+        >
+          {sheds.map((shed) => (
+            <div key={shed.href} data-card className="carousel-card-wrap">
+              <Link href={shed.href} className="carousel-card-link">
+                <div className="carousel-img-wrapper">
+                  <div
+                    className="carousel-img"
+                    role="img"
+                    aria-label={shed.name}
+                    style={{ backgroundImage: `url(${shed.image})` }}
+                  />
+                  <div className="carousel-overlay">
+                    <span className="carousel-view-tag">View Details</span>
+                  </div>
                 </div>
-                <div style={{ color: "#fff", fontWeight: 700, fontSize: 16, fontFamily: "Arial, sans-serif", lineHeight: 1.08 }}>
-                  {formatPrice(shed.price)}
+                <div className="carousel-info">
+                  <div className="carousel-info-name">{shed.name}</div>
+                  <div className="carousel-info-price">{formatPrice(shed.price)}</div>
                 </div>
-              </div>
-            </Link>
-          </div>
-        ))}
+              </Link>
+            </div>
+          ))}
+        </div>
+
+        {/* Dots */}
+        <div
+          role="tablist"
+          aria-label="Featured sheds navigation"
+          style={{
+            position: "absolute",
+            bottom: 4,
+            left: "50%",
+            transform: "translateX(-50%)",
+            display: "flex",
+            gap: 8,
+            alignItems: "center",
+          }}
+        >
+          {sheds.slice(0, 12).map((_, idx) => (
+            <button
+              key={idx}
+              type="button"
+              role="tab"
+              onClick={() => goToCard(idx)}
+              aria-label={`Go to featured shed ${idx + 1}`}
+              aria-selected={idx === activeIdx}
+              className="carousel-dot"
+              style={{
+                width: idx === activeIdx ? 24 : 9,
+                background: idx === activeIdx ? "#006580" : "#c8c4be",
+              }}
+            />
+          ))}
+        </div>
       </div>
-      <div style={{ position: "absolute", bottom: 0, left: "50%", transform: "translateX(-50%)", display: "flex", gap: 14 }}>
-        {sheds.slice(0, 10).map((shed, idx) => (
-          <button
-            key={shed.href}
-            onClick={() => {
-              const el = scrollRef.current;
-              const card = el?.querySelector("[data-card]") as HTMLElement | null;
-              if (!el || !card) return;
-              el.scrollTo({ left: idx * (card.offsetWidth + 34), behavior: "smooth" });
-            }}
-            aria-label={`Go to featured shed ${idx + 1}`}
-            style={{
-              width: 13,
-              height: 13,
-              borderRadius: "50%",
-              border: "none",
-              background: idx === 2 ? "#000" : "#777",
-              cursor: "pointer",
-              padding: 0,
-            }}
-          />
-        ))}
-      </div>
-    </div>
+    </>
   );
 }

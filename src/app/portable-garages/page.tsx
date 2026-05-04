@@ -8,9 +8,9 @@ import PageHero from "@/components/PageHero";
 import FadeIn from "@/components/FadeIn";
 
 export const metadata: Metadata = {
-  title: "Portable Garages",
+  title: "Portable Garages for Sale | Hudson Falls, NY | Legacy Structures",
   description:
-    "Whether you need to store an antique car or want to have space to work on your vehicle, one of these portable garages might just be the solution you are looking for.",
+    "Shop single and tandem portable garages in Hudson Falls, NY. Perfect for vehicles, equipment, and workshop space. Multiple sizes, finishes, and rent-to-own options available.",
 };
 
 const BASE_URL =

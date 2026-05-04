@@ -8,9 +8,9 @@ import PageHero from "@/components/PageHero";
 import FadeIn from "@/components/FadeIn";
 
 export const metadata: Metadata = {
-  title: "Backyard Barns",
+  title: "Backyard Barns & Lofted Barns for Sale | Hudson Falls, NY",
   description:
-    "Backyard barns, also commonly referred to as storage barns, are one of the most effective ways to add storage space for your valuable belongings.",
+    "Shop mini barns, lofted barns, and metal lofted barns at Legacy Structures in Hudson Falls, NY. Multiple sizes and finishes, rent-to-own available. Family-owned and locally built.",
 };
 
 const BASE_URL =

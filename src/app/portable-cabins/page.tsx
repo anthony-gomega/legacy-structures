@@ -8,9 +8,9 @@ import PageHero from "@/components/PageHero";
 import FadeIn from "@/components/FadeIn";
 
 export const metadata: Metadata = {
-  title: "Portable Cabins",
+  title: "Portable Cabins for Sale | Hudson Falls, NY | Legacy Structures",
   description:
-    "Our pre-fab cabins are one of the most popular structures we sell. These buildings have many possible uses, such as a hunting cabin, home office, she-shed, man-cave, or even a tiny home.",
+    "Prefab portable cabins perfect for hunting cabins, home offices, she-sheds, man-caves, or tiny homes. Built locally in Hudson Falls, NY. Multiple sizes and finishes available.",
 };
 
 const BASE_URL =

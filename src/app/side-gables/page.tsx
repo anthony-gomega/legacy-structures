@@ -8,9 +8,9 @@ import PageHero from "@/components/PageHero";
 import FadeIn from "@/components/FadeIn";
 
 export const metadata: Metadata = {
-  title: "Side Gables",
+  title: "Side Gable Buildings | Hudson Falls, NY | Legacy Structures",
   description:
-    "Side Gable Buildings by Legacy Structures — a smart alternative to traditional side-entry utility sheds with the roof gable running along the length of the building.",
+    "Side gable storage buildings — a smart side-entry alternative with the roof gable running the length of the structure. Multiple sizes available in Hudson Falls, NY.",
 };
 
 const BASE_URL =

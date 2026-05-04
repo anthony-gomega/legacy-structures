@@ -33,44 +33,86 @@ export default function ProductSection({
   const resolvedImage = imageSrc || image || "";
 
   return (
-    <div className="flex flex-col md:flex-row gap-8 items-start">
-      {/* Image */}
-      <div className="w-full md:w-[28%] shrink-0">
-        <Image
-          src={resolvedImage}
-          alt={imageAlt}
-          width={400}
-          height={300}
-          className="w-full h-auto rounded-md"
-          style={{ maxHeight: 280, objectFit: "contain" }}
-        />
-      </div>
+    <>
+      <style>{`
+        .product-img-wrap {
+          overflow: hidden;
+          border-radius: 6px;
+        }
+        .product-img-el {
+          transition: transform 0.5s ease !important;
+          display: block;
+          width: 100%;
+          height: auto;
+        }
+        .product-img-wrap:hover .product-img-el {
+          transform: scale(1.06);
+        }
+        .product-size-label {
+          font-size: 11px;
+          font-weight: 700;
+          color: #bd171f;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          margin-bottom: 4px;
+        }
+        .product-size-item {
+          font-size: 14px;
+          color: #5a6c7e;
+          line-height: 1.8;
+        }
+      `}</style>
 
-      {/* Text */}
-      <div className="flex-1">
-        <h3 className="product-section-title">{title}</h3>
-        <p className="text-[15px] text-[#5a6c7e] leading-relaxed mb-4">{description}</p>
+      <div className="flex flex-col md:flex-row gap-8 items-start">
+        {/* Image with hover zoom */}
+        <div className="w-full md:w-[28%] shrink-0 product-img-wrap">
+          <Image
+            src={resolvedImage}
+            alt={imageAlt}
+            width={400}
+            height={300}
+            className="product-img-el"
+            style={{ maxHeight: 280, objectFit: "contain" }}
+          />
+        </div>
 
-        {resolvedSizeEntries.length > 0 && (
-          <>
-            <p className="text-[12px] font-bold text-[#1a3a5c] uppercase tracking-[1.5px] mt-4 mb-3 pb-0">
-              Available Sizes
-            </p>
-            <div className="flex flex-wrap gap-6">
-              {resolvedSizeEntries.map(([label, sizeList]) => (
-                <div key={label} className="min-w-[90px]">
-                  <div className="text-[11px] font-bold text-[#c0392b] uppercase tracking-[1px] mb-1">{label}</div>
-                  <ul className="list-none p-0 m-0">
-                    {sizeList.map((size) => (
-                      <li key={size} className="text-[14px] text-[#5a6c7e] leading-7">{size}</li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </>
-        )}
+        {/* Text */}
+        <div className="flex-1">
+          <h3 className="product-section-title">{title}</h3>
+          <p className="text-[15px] text-[#5a6c7e] leading-relaxed mb-4">{description}</p>
+
+          {resolvedSizeEntries.length > 0 && (
+            <>
+              <p
+                style={{
+                  fontSize: 11,
+                  fontWeight: 700,
+                  color: "#1a3a5c",
+                  textTransform: "uppercase",
+                  letterSpacing: "1.5px",
+                  marginTop: 16,
+                  marginBottom: 10,
+                  paddingBottom: 0,
+                }}
+              >
+                Available Sizes
+              </p>
+              <div className="flex flex-wrap gap-6">
+                {resolvedSizeEntries.map(([label, sizeList]) => (
+                  <div key={label} className="min-w-[90px]">
+                    <div className="product-size-label">{label}</div>
+                    <ul className="list-none p-0 m-0">
+                      {sizeList.map((size) => (
+                        <li key={size} className="product-size-item">{size}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

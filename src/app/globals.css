@@ -39,6 +39,10 @@
   --font-body: var(--font-inter), "Inter", sans-serif;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -52,6 +56,24 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: #f1ede8; }
+::-webkit-scrollbar-thumb { background: #bd171f; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #9a1218; }
+
+/* Keyboard focus — visible ring in brand gold */
+:focus-visible {
+  outline: 3px solid #ffc400;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 h1 {

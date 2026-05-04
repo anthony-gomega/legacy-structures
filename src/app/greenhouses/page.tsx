@@ -8,9 +8,9 @@ import PageHero from "@/components/PageHero";
 import FadeIn from "@/components/FadeIn";
 
 export const metadata: Metadata = {
-  title: "Greenhouses",
+  title: "Greenhouses for Sale | Hudson Falls, NY | Legacy Structures",
   description:
-    "Looking to grow your own herbs, vegetables, or flowers year-round? Our Greenhouses at Legacy Structures offer an ideal space to cultivate your garden in a protected, climate-controlled environment.",
+    "Grow herbs, vegetables, and flowers year-round in a fully assembled, climate-controlled greenhouse. Delivered and leveled on-site in Hudson Falls, NY. 8x12 and 8x16 sizes available.",
 };
 
 const BASE_URL =

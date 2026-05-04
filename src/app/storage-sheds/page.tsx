@@ -8,9 +8,9 @@ import PageHero from "@/components/PageHero";
 import FadeIn from "@/components/FadeIn";
 
 export const metadata: Metadata = {
-  title: "Storage Sheds",
+  title: "Storage Sheds for Sale in Hudson Falls, NY",
   description:
-    "Our storage sheds are a great option for adding much-needed storage space around your home.",
+    "Shop utility sheds, metal sheds, single-slope sheds, and dormer sheds at Legacy Structures in Hudson Falls, NY. Quality construction, multiple sizes, rent-to-own available.",
 };
 
 const BASE_URL =
