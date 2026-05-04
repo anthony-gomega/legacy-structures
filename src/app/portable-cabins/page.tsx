@@ -107,7 +107,7 @@ export default function PortableCabinsPage() {
         <FadeIn>
         <div className="border-b-[3px] border-[#1a3a5c] pb-10 mb-10">
           <ProductSection
-            title="ABOUT OUR LOFTED SIDE PORCH BARNS"
+            title="ABOUT OUR LOFTED SIDE PORCH CABINS"
             description="Our Lofted Side Porch Cabins offer the ability to have a dedicated workspace near the porch along with a plentiful storage area. The porch is 4ft x 8ft and includes a 9 Lite Window Door which allows plenty of natural light. With the ability to place the 2' x 3' windows where you like, this building is a blank canvas awaiting your creative touch. This package includes double doors on the side. The Lofted Side Porch Cabin comes in the following sizes:"
             image={`${BASE_URL}/lofted-side-porch-cabin.png`}
             imageAlt="Lofted Side Porch Cabin"

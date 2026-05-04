@@ -74,7 +74,7 @@ export default function ChickenCoopsPage() {
         <FadeIn>
         <div className="border-b-[3px] border-[#1a3a5c] pb-10 mb-10">
           <ProductSection
-            title="More About Our Chicken Coops..."
+            title="ABOUT OUR CHICKEN COOPS"
             description="Our Chicken Coops offer a practical, low-maintenance solution for anyone looking to raise chickens in a safe and secure backyard setup. These buildings are designed to protect your flock from predators while offering great airflow and easy access for cleaning and egg gathering. Each coop features a gable-style roof, a 3ft wooden barn door on the end, two 24&quot; x 27&quot; single-pane windows, a roosting ladder, and six nesting boxes with exterior hatch access for convenient egg collection. A small chicken door gives your flock access to roam in a fenced yard or run. These coops are available in both T1-11 siding and LP Smart Panel&#8482; siding and come in the following sizes:"
             image={`${BASE_URL}/BYO-ChickenCoops-Body.png`}
             imageAlt="Chicken Coop"

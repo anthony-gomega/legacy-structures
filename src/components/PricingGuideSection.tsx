@@ -34,29 +34,29 @@ export default function PricingGuideSection() {
   };
 
   return (
-    <section style={{ background: "#f7f5f2", padding: "48px 24px" }}>
+    <section id="pricing-guide" style={{ background: "#e9e6e1", padding: "44px 24px 52px" }}>
       <div style={{ maxWidth: 900, margin: "0 auto", textAlign: "center" }}>
-        <h2 style={{ color: "#c0392b", fontSize: 24, fontWeight: 700, fontFamily: "var(--font-poppins), Poppins, sans-serif", paddingBottom: 10 }}>
-          Download Our FREE Pricing Guide
+        <h2 style={{ color: "#bd171f", fontSize: "clamp(28px, 2.5vw, 43px)", fontWeight: 700, fontFamily: "var(--font-oswald), Impact, sans-serif", paddingBottom: 18, textTransform: "uppercase" }}>
+          Looking for Pricing? Download Our FREE Pricing Guide!
         </h2>
-        <p style={{ fontSize: 15, color: "#5a6c7e", maxWidth: 650, margin: "0 auto", paddingBottom: 28 }}>
-          Get detailed pricing on all models, sizes, and customization options to help you make an informed decision.
+        <p style={{ fontSize: 18, color: "#1f1f1f", maxWidth: 1100, margin: "0 auto", paddingBottom: 28, fontFamily: "Georgia, 'Times New Roman', serif", lineHeight: 1.55 }}>
+          Ready to explore your options for the perfect portable building? Start with our <strong>FREE Pricing Guide!</strong> This detailed download provides you with all the pricing information you need to make an informed decision, including various models, sizes, and customization options. Don&apos;t miss out on this essential resource.
         </p>
       </div>
 
       <div style={{ maxWidth: 800, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "center", gap: 40, flexWrap: "wrap", marginBottom: 40 }}>
         <img src="https://legacystructuresusa.com/wp-content/themes/barndealer/assets/images/homepage-devices.png" alt="Pricing Guide" style={{ maxWidth: 360, width: "100%" }} />
         <div style={{ textAlign: "center" }}>
-          <p style={{ fontWeight: 700, fontSize: 18, color: "#1a3a5c", paddingBottom: 8, fontFamily: "var(--font-poppins)" }}>Free Pricing Guide!</p>
-          <a href="#pricing-form" style={{ display: "inline-block", background: "#d4a017", color: "#fff", fontWeight: 700, fontSize: 15, padding: "12px 36px", borderRadius: 6, textDecoration: "none", textTransform: "uppercase" }}>
-            Download Here
+          <p style={{ fontWeight: 700, fontSize: 28, color: "#bd171f", paddingBottom: 12, fontFamily: "var(--font-oswald), Impact, sans-serif", textTransform: "uppercase" }}>Free Pricing Guide!</p>
+          <a href="#pricing-form" style={{ display: "inline-block", background: "#ffc400", color: "#050505", fontWeight: 700, fontSize: 17, padding: "13px 34px", borderRadius: 4, textDecoration: "none", textTransform: "uppercase" }}>
+            Download Here!
           </a>
         </div>
       </div>
 
       {/* Form */}
       <div id="pricing-form" style={{ maxWidth: 600, margin: "0 auto", background: "#fff", borderRadius: 12, padding: 32, border: "1px solid #e8e4df", boxShadow: "0 2px 12px rgba(0,0,0,0.06)" }}>
-        <h3 style={{ textAlign: "center", fontSize: 18, fontWeight: 700, color: "#1a3a5c", marginBottom: 20, fontFamily: "var(--font-poppins)" }}>Request Your Pricing Guide</h3>
+        <h3 style={{ textAlign: "center", fontSize: 22, fontWeight: 700, color: "#006580", marginBottom: 20, fontFamily: "var(--font-oswald), Impact, sans-serif", textTransform: "uppercase" }}>Request Your Pricing Guide</h3>
         <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 12 }}>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
             <input type="text" name="firstName" placeholder="First Name" value={formData.firstName} onChange={handleChange} required className={inputClasses} />

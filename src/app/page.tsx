@@ -2,6 +2,7 @@
 import Link from "next/link";
 import FeaturedCarousel from "@/components/FeaturedCarousel";
 import HeroWithOverlay from "@/components/HeroWithOverlay";
+import PricingGuideSection from "@/components/PricingGuideSection";
 
 const featuredSheds = [
   { name: "Lofted Barn Playhouse", price: 7818.5, image: "https://legacystructuresusa.com/wp-content/uploads/2025/07/IMG_0101-1753234196232-scaled.jpeg", href: "/building/lofted-barn-playhouse" },
@@ -60,19 +61,7 @@ export default function Home() {
         High Quality Materials and Superior Craftsmanship
       </section>
 
-      <section className="pricing-guide" id="pricing-form">
-        <h2>Looking for Pricing? Download Our FREE Pricing Guide!</h2>
-        <p>
-          Ready to explore your options for the perfect portable building? Start with our FREE Pricing Guide! This detailed download provides you with all the pricing information you need to make an informed decision, including various models, sizes, and customization options. Don&apos;t miss out on this essential resource — click below to Download Your FREE Copy and take the first step towards choosing your ideal portable building today!
-        </p>
-        <div className="pricing-row">
-          <img src="https://legacystructuresusa.com/wp-content/themes/barndealer/assets/images/homepage-devices.png" alt="Free pricing guide shown on laptop and phone" />
-          <div>
-            <h3>Free Pricing Guide!</h3>
-            <a className="download-btn" href="#pricing-form">Download Here!</a>
-          </div>
-        </div>
-      </section>
+      <PricingGuideSection />
 
       <section className="warranty-band">
         <a href="https://backyardoutfittersusa.com/warranty-and-guarantee/" target="_blank" rel="noopener noreferrer">

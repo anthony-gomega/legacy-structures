@@ -1,8 +1,8 @@
 "use client";
 
-/* eslint-disable @next/next/no-img-element */
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 const modelLinks = [
@@ -54,7 +54,7 @@ export default function Header() {
           align-items: center;
           justify-content: space-between;
           gap: 24px;
-          padding: 0 clamp(24px, 9vw, 130px);
+          padding-left: 140px;
         }
         .header-cta-group {
           display: flex;
@@ -62,23 +62,18 @@ export default function Header() {
           align-items: center;
           gap: 0;
           min-width: 280px;
-        }
-        .header-logo {
-          display: block;
-          width: 170px;
-          max-width: 34vw;
-          height: auto;
+          padding-right: 35px;
         }
         .header-quote-btn {
           display: block;
           background: #bf1b22;
           color: #fff !important;
           font-weight: 700;
-          font-size: 26px;
+          font-size: 32px;
           line-height: 1;
           font-family: Georgia, "Times New Roman", serif;
-          width: 300px;
-          height: 44px;
+          width: 405px;
+          height: 62px;
           padding: 0 18px;
           border-radius: 5px;
           text-decoration: none;
@@ -99,7 +94,7 @@ export default function Header() {
           color: #075f81 !important;
           text-decoration: none;
           font-weight: 700;
-          font-size: 27px;
+          font-size: 36px;
           line-height: 1.05;
           font-family: Georgia, "Times New Roman", serif;
           padding-top: 4px;
@@ -114,8 +109,10 @@ export default function Header() {
           width: 100%;
         }
         .nav-bar {
-          max-width: 1500px;
+          max-width: 1612px;
           margin: 0 auto;
+          padding-left: 160px;
+          box-sizing: border-box;
         }
         .nav-toggle { display: none; padding: 10px 24px; }
         .nav-toggle button {
@@ -126,48 +123,70 @@ export default function Header() {
           display: block; width: 24px; height: 2.5px; background: #fff; border-radius: 2px;
         }
         .nav-list {
-          display: flex; justify-content: center; list-style: none;
-          gap: clamp(44px, 6vw, 120px);
+          display: flex; justify-content: space-between; list-style: none;
+          gap: 0;
           margin: 0; padding: 0;
         }
         .nav-item { position: relative; flex: 0 0 auto; }
         .nav-link {
-          display: block; padding: 13px 18px 15px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-width: clamp(130px, 11vw, 230px);
+          height: 84px;
+          padding: 0 18px;
           color: #fff !important;
           font-family: var(--font-oswald), Impact, sans-serif;
-          font-size: 19px; font-weight: 700;
+          font-size: 28px; font-weight: 700;
           text-transform: uppercase; letter-spacing: 0;
           text-decoration: none; text-align: center;
           background: transparent;
+          transition: background-color 180ms ease, color 180ms ease;
         }
-        .nav-link:hover { color: #fff !important; background: #a9151b; }
         .nav-link.active { color: #fff !important; }
+        .nav-link:hover,
+        .nav-link.active:hover,
+        .dropdown-parent:hover > .nav-link {
+          color: #bd171f !important;
+          background: #fff;
+        }
 
         .dropdown-menu {
-          display: none; position: absolute; top: 100%; left: 50%;
+          display: block; position: absolute; top: 100%; left: 50%;
           transform: translateX(-50%); background: #fff;
-          box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-          border-radius: 0 0 8px 8px; z-index: 1000;
-          list-style: none; margin: 0; padding: 8px 0; min-width: 230px;
+          box-shadow: none;
+          border-radius: 0; z-index: 1000;
+          list-style: none; margin: 0; padding: 20px 0 22px; min-width: clamp(230px, 16vw, 330px);
+          opacity: 0;
+          visibility: hidden;
+          pointer-events: none;
+          transition: opacity 180ms ease, visibility 180ms ease;
         }
-        .dropdown-parent:hover > .dropdown-menu { display: block; }
+        .dropdown-parent:hover > .dropdown-menu {
+          opacity: 1;
+          visibility: visible;
+          pointer-events: auto;
+        }
         .dropdown-link {
-          display: block; padding: 11px 22px;
-          color: #2c3e50 !important;
+          display: block; padding: 11px 28px;
+          color: #bd171f !important;
           font-family: var(--font-oswald), Impact, sans-serif;
-          font-size: 14px; font-weight: 500;
-          text-decoration: none; transition: all 0.15s ease;
+          font-size: 24px; font-weight: 700;
+          line-height: 1.15;
+          text-transform: uppercase;
+          text-decoration: none;
+          transition: color 180ms ease, transform 180ms ease;
         }
-        .dropdown-link:hover { background: #f7f5f2; color: #c0392b !important; padding-left: 26px; }
+        .dropdown-link:hover { background: #fff; color: #9f141a !important; transform: translateX(4px); }
 
         @media (max-width: 768px) {
           .header-top { padding: 18px 12px; }
           .header-top-inner { flex-direction: row; gap: 8px; flex-wrap: wrap; justify-content: center; }
-          .header-logo { width: 150px; max-width: 70vw; }
           .header-cta-group { min-width: 0; width: 100%; }
           .header-quote-btn { width: auto; height: auto; font-size: 22px; padding: 8px 16px; }
           .header-phone { font-size: 23px; }
           .nav-toggle { display: block; text-align: right; }
+          .nav-bar { padding-left: 0; }
           .nav-list { display: none; flex-direction: column; background: #bd171f; }
           .nav-list.open { display: flex !important; }
           .nav-link { text-align: left; padding: 12px 20px; font-size: 18px; }
@@ -182,10 +201,13 @@ export default function Header() {
         <div className="header-top">
           <div className="header-top-inner">
             <Link href="/">
-              <img
+              <Image
                 src="https://legacystructuresusa.com/wp-content/uploads/2025/07/LEGECY-STRUCTURES-dark-blue-1.png"
                 alt="Legacy Structures"
-                className="header-logo"
+                width={170}
+                height={90}
+                style={{ maxHeight: "132px", width: "auto", height: "auto" }}
+                priority
               />
             </Link>
             <div className="header-cta-group">

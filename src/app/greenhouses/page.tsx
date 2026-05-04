@@ -74,7 +74,7 @@ export default function GreenhousesPage() {
         <FadeIn>
         <div className="border-b-[3px] border-[#1a3a5c] pb-10 mb-10">
           <ProductSection
-            title="More About Our Greenhouses..."
+            title="ABOUT OUR GREENHOUSES"
             description="Our Greenhouses offer a simple, low-maintenance way to grow your favorite plants, herbs, or vegetables year-round--right in your backyard. Designed to provide a warm, light-filled environment, these buildings make it easy to extend your growing season while protecting your plants from the elements. Each greenhouse includes a barn-style door with a built-in window, a vented louvre door that opens automatically as temperatures rise, and a wrap-around potting shelf inside for easy planting and organization. The clear polycarbonate panels allow in plenty of sunlight, while the LP Smart Siding base adds durability and a finished look. Greenhouses are stained inside and out in your choice of color and come in the following sizes:"
             image={`${BASE_URL}/BYO-Greenhouses-Body.jpg`}
             imageAlt="Inside of Greenhouse"

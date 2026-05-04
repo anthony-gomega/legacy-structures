@@ -2,7 +2,6 @@
 
 import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { buildings } from "@/data/buildings";
 
 const parsePrice = (s: string | undefined): number => {
@@ -157,8 +156,8 @@ function PricingGuideCTA() {
         >
           Get Your Free Pricing Guide
         </span>
-        <a
-          href="#"
+        <Link
+          href="/contact-us"
           style={{
             color: "#ffc800",
             fontSize: "22px",
@@ -168,7 +167,7 @@ function PricingGuideCTA() {
           }}
         >
           Click Here!
-        </a>
+        </Link>
       </div>
     </div>
   );
@@ -193,6 +192,7 @@ function PriceBox({
         flexDirection: "column",
         width: "auto",
         flex: 1,
+        minWidth: 0,
         marginBottom: "15px",
       }}
     >
@@ -231,17 +231,10 @@ function InventoryItemRow({ item }: { item: InventoryItem }) {
 
   return (
     <div
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        padding: "60px 20px",
-        borderTop: "2px solid #af0019",
-        maxWidth: "1150px",
-        margin: "auto",
-      }}
+      className="inventory-item-row"
     >
       {/* img-wrapper */}
-      <div style={{ width: "30%" }}>
+      <div className="inventory-image-col">
         <Link href={`/building/${item.slug}`}>
           <div
             style={{
@@ -256,19 +249,13 @@ function InventoryItemRow({ item }: { item: InventoryItem }) {
       </div>
 
       {/* info-wrapper */}
-      <div style={{ width: "70%" }}>
+      <div className="inventory-info-col">
         {/* text-pricing-group */}
         <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "flex-start",
-            paddingLeft: "20px",
-            minHeight: "225px",
-          }}
+          className="inventory-text-pricing"
         >
           {/* text-info */}
-          <div style={{ width: "50%" }}>
+          <div className="inventory-text-info">
             <ul
               style={{
                 listStyle: "none",
@@ -371,14 +358,10 @@ function InventoryItemRow({ item }: { item: InventoryItem }) {
           </div>
 
           {/* price-info */}
-          <div style={{ width: "44%" }}>
+          <div className="inventory-price-info">
             {/* pricing-section - HORIZONTAL ROW */}
             <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                gap: "2%",
-              }}
+              className="inventory-pricing-section"
             >
               {/* Cash Price box */}
               {hasSale ? (
@@ -411,12 +394,7 @@ function InventoryItemRow({ item }: { item: InventoryItem }) {
 
             {/* link-button */}
             <div
-              style={{
-                display: "flex",
-                gap: "2%",
-                justifyContent: "center",
-                marginTop: "5px",
-              }}
+              className="inventory-link-buttons"
             >
               <a
                 href={`https://orders.barnportal.com/myquote?dealerid=&dir=1&template=${item.designTemplate}`}
@@ -523,6 +501,75 @@ export default function InventoryPage() {
     <div style={{ background: "#fff", minHeight: "100vh" }}>
       {/* wrapper blue-top */}
       <div style={{ borderTop: "5px solid #1a3a5c" }}>
+        <style>{`
+          .inventory-item-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 60px 20px;
+            border-top: 2px solid #af0019;
+            max-width: 1150px;
+            margin: auto;
+          }
+          .inventory-image-col {
+            width: 30%;
+          }
+          .inventory-info-col {
+            width: 70%;
+          }
+          .inventory-text-pricing {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding-left: 20px;
+            min-height: 225px;
+          }
+          .inventory-text-info {
+            width: 50%;
+          }
+          .inventory-price-info {
+            width: 44%;
+          }
+          .inventory-pricing-section,
+          .inventory-link-buttons {
+            display: flex;
+            flex-direction: row;
+            gap: 2%;
+          }
+          .inventory-link-buttons {
+            justify-content: center;
+            margin-top: 5px;
+          }
+          @media (max-width: 980px) {
+            .inventory-item-row {
+              flex-direction: column;
+              gap: 24px;
+              padding: 44px 20px;
+            }
+            .inventory-image-col,
+            .inventory-info-col,
+            .inventory-text-info,
+            .inventory-price-info {
+              width: 100%;
+            }
+            .inventory-text-pricing {
+              flex-direction: column;
+              gap: 22px;
+              padding-left: 0;
+              min-height: 0;
+            }
+          }
+          @media (max-width: 560px) {
+            .inventory-pricing-section {
+              display: grid;
+              grid-template-columns: repeat(2, minmax(0, 1fr));
+              gap: 8px;
+            }
+            .inventory-link-buttons {
+              flex-direction: column;
+              gap: 8px;
+            }
+          }
+        `}</style>
         {/* Page Heading */}
         <h1
           style={{
