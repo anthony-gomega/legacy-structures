@@ -12,9 +12,9 @@ import { createPageMetadata } from "@/lib/metadata";
 import { BRAND } from "@/lib/constants";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Portable Cabins Near Lake George, NY",
+  title: "Portable Cabins for Sale in New York",
   description:
-    "Shop prefab portable cabins near Lake George, NY — ideal for hunting cabins, tiny homes & she-sheds. Locally built with a 5-year warranty. Get your free quote today!",
+    "Shop portable cabins for sale in New York from Legacy Structures. Explore sizes and uses for hunting cabins, home offices, and more. Get a free quote.",
   path: "/portable-cabins",
 });
 
