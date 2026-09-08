@@ -45,6 +45,7 @@ import whatToLookForInAPortableCabin from "./what-to-look-for-in-a-portable-cabi
 import whatToLookForWhenBuyingPrebuiltShed from "./what-to-look-for-when-buying-prebuilt-shed";
 import winterProofChickenCoop from "./winter-proof-chicken-coop";
 import singleSlopeShedProsAndCons from "./single-slope-shed-pros-and-cons";
+import dormerShedVsStandardGableShed from "./dormer-shed-vs-standard-gable-shed";
 
 export interface BlogPost {
   slug: string;
@@ -107,6 +108,7 @@ const blogPosts: BlogPost[] = [
   whatToLookForWhenBuyingPrebuiltShed,
   winterProofChickenCoop,
   singleSlopeShedProsAndCons,
+  dormerShedVsStandardGableShed,
 
   {
     slug: "how-to-choose-a-greenhouse",
