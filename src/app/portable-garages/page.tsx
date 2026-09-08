@@ -12,9 +12,9 @@ import { createPageMetadata } from "@/lib/metadata";
 import { BRAND } from "@/lib/constants";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Garages Near Saratoga Springs, NY",
+  title: "Portable Garages Near Hudson Falls, NY | Legacy Structures",
   description:
-    "Shop single & tandem portable garages near Saratoga Springs, NY. Perfect for vehicles, equipment & workshop space. Free delivery within 30 miles & rent-to-own available.",
+    "Shop single-wide and double-wide portable garages near Hudson Falls, NY. Protect vehicles with delivery, installation, and local quotes from Legacy Structures.",
   path: "/portable-garages",
 });
 
